@@ -23,6 +23,8 @@ public:    // methods of the List ADT
 	int listSize();
 	void printList();
 	void addItem(T item);
+	string deleteItem(string item);
+	int deleteItem(int item);
 private:     // data members for linked list implementation
 	int count;
 	int max; //max number of nodes
@@ -106,6 +108,91 @@ void List<T>::printList() {
 	cout << endl;
 }//printList
 
+template <>
+string List<string>::deleteItem(string item) {
+	string result = "";
+	if (isEmpty()) {
+		cout << "List underflow\n";
+		return "-10000";
+	}
+	Node<string>* previous = NULL, * following = first;
+	while (following != NULL && following->data != item)           //searching for item
+	{
+		previous = following;
+		following = following->next;
+	}//while
+	//deleting 1st node
+	if (following == NULL) {
+		cout << "Item was not found and not deleted\n";
+		return "-10000";
+	}
+	while (following != NULL) {
+		previous = NULL;
+		following = first;
+		while (following != NULL && following->data != item)           //searching for item
+		{
+			previous = following;
+			following = following->next;
+		}//while
+		if (previous == NULL && following != NULL && following->data == item)
+		{
+			result = following->data;
+			first = first->next;
+			count--;
+		}
+		else if (previous != NULL && following != NULL && following->data == item)
+		{
+			result = following->data;		               //deleting not 1st  node.
+			previous->next = following->next;
+			count--;
+		}
+		if (following == NULL) break;
+	}
+	return item;
+}
+
+template <>
+int List<int>::deleteItem(int item) {
+	int result = 0;
+	if (isEmpty()) {
+		cout << "List underflow\n";
+		return -10000;
+	}
+	Node<int>* previous = NULL, * following = first;
+	while (following != NULL && following->data != item)           //searching for item
+	{
+		previous = following;
+		following = following->next;
+	}//while
+	//deleting 1st node
+	if (following == NULL) {
+		cout << "Item was not found and not deleted\n";
+		return -10000;
+	}
+	while (following != NULL) {
+		previous = NULL;
+		following = first;
+		while (following != NULL && following->data != item)           //searching for item
+		{
+			previous = following;
+			following = following->next;
+		}//while
+		if (previous == NULL && following != NULL && following->data == item)
+		{
+			result = following->data;
+			first = first->next;
+			count--;
+		}
+		else if (previous != NULL && following != NULL && following->data == item)
+		{
+			result = following->data;		               //deleting not 1st  node.
+			previous->next = following->next;
+			count--;
+		}
+		if (following == NULL) break;
+	}
+	return item;
+}
 
 void main()
 {
