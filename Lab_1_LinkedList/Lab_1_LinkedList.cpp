@@ -25,6 +25,10 @@ public:    // methods of the List ADT
 	void addItem(T item);
 	string deleteItem(string item);
 	int deleteItem(int item);
+	void makeEmpty();
+	bool search(T item);
+	string retrieve(string item);
+	int retrieve(int item);
 private:     // data members for linked list implementation
 	int count;
 	int max; //max number of nodes
@@ -193,6 +197,50 @@ int List<int>::deleteItem(int item) {
 	}
 	return item;
 }
+
+template <typename T>
+void List<T>::makeEmpty() {
+	count = 0;
+	Node<T>* temp;
+	while (first != NULL) {
+		temp = first;
+		first = first->next;
+		delete temp;
+	}
+}//makeEmpty
+
+template <typename T>
+bool List<T>::search(T item) {
+	Node<T>* p = first;
+	while (p != NULL)
+	{
+		if (p->data == item) return true;
+		else p = p->next;
+	}//while
+	return false;
+}//search
+
+template <>
+string List<string>::retrieve(string item) {
+	Node<string>* p = first;
+	while (p != NULL) {
+		if (p->data == item) return p->data;
+		else p = p->next;
+	}//while
+	cout << "item was not found, was not retrieved\n";
+	return "-10000"; //to signal not found	
+}//retrieve
+
+template <>
+int List<int>::retrieve(int item) {
+	Node<int>* p = first;
+	while (p != NULL) {
+		if (p->data == item) return p->data;
+		else p = p->next;
+	}//while
+	cout << "item was not found, was not retrieved\n";
+	return -10000; //to signal not found	
+}//retrieve
 
 void main()
 {
