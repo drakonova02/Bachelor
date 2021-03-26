@@ -29,6 +29,7 @@ public:    // methods of the List ADT
 	bool search(T item);
 	string retrieve(string item);
 	int retrieve(int item);
+	void additional(int k, int j);
 private:     // data members for linked list implementation
 	int count;
 	int max; //max number of nodes
@@ -241,6 +242,26 @@ int List<int>::retrieve(int item) {
 	cout << "item was not found, was not retrieved\n";
 	return -10000; //to signal not found	
 }//retrieve
+template <typename T>
+void List<T>::additional(int k, int j) {
+	Node<T>* previous = NULL, * following = first;
+	if (first != NULL && k <= count - 1) {
+		if (j >= count) j = count - 1;
+		j -= k;
+		count = j + 1;
+		while (k-- != 0) {
+			previous = following;
+			following = following->next;
+		}
+		first = following;
+		while (j-- != 0) {
+			previous = following;
+			following = following->next;
+		}
+		following->next = NULL;
+	}
+	else cout << "\n\nError of additional task" << endl;
+}
 
 void main()
 {
@@ -253,5 +274,8 @@ void main()
 	A.addItem("vanda");
 	A.addItem("sara");
 	A.addItem("archi");
+	A.printList();
+	cout << A.retrieve("rchi");
+	A.additional(1, 6);
 	A.printList();
 }
