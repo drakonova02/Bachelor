@@ -1,20 +1,56 @@
-﻿// Lab_1_LinkedList.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
+﻿#include <iostream>
+#include<string>
 
-#include <iostream>
+using namespace std;
 
-int main()
+template <typename T>
+struct Node {
+	//data members
+	T data;
+	Node<T>* next;
+	// constructors
+	Node();
+	Node(T d, Node<T>* link = NULL);
+};
+
+template <typename T>
+class List {
+public:    // methods of the List ADT
+	List(int = 10);	//default constructor
+	~List();	//destructor
+private:     // data members for linked list implementation
+	int count;
+	int max; //max number of nodes
+	Node<T>* first;
+};//List
+
+template <typename T>
+Node<T>::Node() {
+	next = NULL;
+}	//constructor for an empty node
+
+template <typename T>
+Node<T>::Node(T item, Node<T>* link) {
+	data = item;
+	next = link;
+}	//node constructor with initial values
+
+template <typename T>
+List<T>::List(int n) {
+	max = n;
+	count = 0;
+	first = NULL;
+}//empty
+
+template <typename T>
+List<T>::~List() {
+	makeEmpty();
+}//~List
+
+void main()
 {
-    std::cout << "Hello World!\n";
+	int a;
+	cout << "Write max number for nodes: ";
+	cin >> a;
+	List <string> A(a); //object A of class List with int items Note
 }
-
-// Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
-// Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
-
-// Советы по началу работы 
-//   1. В окне обозревателя решений можно добавлять файлы и управлять ими.
-//   2. В окне Team Explorer можно подключиться к системе управления версиями.
-//   3. В окне "Выходные данные" можно просматривать выходные данные сборки и другие сообщения.
-//   4. В окне "Список ошибок" можно просматривать ошибки.
-//   5. Последовательно выберите пункты меню "Проект" > "Добавить новый элемент", чтобы создать файлы кода, или "Проект" > "Добавить существующий элемент", чтобы добавить в проект существующие файлы кода.
-//   6. Чтобы снова открыть этот проект позже, выберите пункты меню "Файл" > "Открыть" > "Проект" и выберите SLN-файл.
