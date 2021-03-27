@@ -318,6 +318,8 @@ void BalanceBinarySearchTree<T>::doubleRightChild(TNode<T>*& p) {
 	rotateRightChild(p);
 }
 
+//additional metods
+
 int main()
 {
    
