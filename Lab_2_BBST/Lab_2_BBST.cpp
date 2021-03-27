@@ -169,7 +169,8 @@ protected:
 	void symmetricalBBST_rec(TNode<T>* p);
 	TNode<int>* fatherNode_rec(TNode<int>* p, int n);
 	TNode<string>* fatherNode_rec(TNode<string>* p, string s);
-
+	TNode<string>* commonAncestor_rec(TNode<string>* p, string s1, string s2);
+	TNode<int>* commonAncestor_rec(TNode<int>* p, int n1, int n2);
 public:
 	BalanceBinarySearchTree() :BinaryTree<T>() {}  // Base class constructor is used.
 	void addNode(T item);
@@ -190,6 +191,8 @@ public:
 	BalanceBinarySearchTree<T> symmetricalBBST();
 	int fatherNode(int n);
 	string fatherNode(string s);
+	int commonAncestor(int n1, int n2);
+	string commonAncestor(string s1, string s2);
 };
 
 // addNode
@@ -640,6 +643,54 @@ TNode<string>* BalanceBinarySearchTree<string>::fatherNode_rec(TNode<string>* p,
 	if (p->right->data == s || p->left->data == s) return p;
 	if (p->data < s) return fatherNode_rec(p->right, s);
 	return fatherNode_rec(p->left, s);
+}
+
+//14commonAncestor
+template<>
+int BalanceBinarySearchTree<int>::commonAncestor(int n1, int n2) {
+	if (BinaryTree<int>::root == NULL || (!(search(n1)) && !(search(n2)))) {
+		cout << "\n\nError\n";
+		return -10000;
+	}
+	else if (!(search(n1))) {
+		cout << endl << n1 << " isn`t in node of tree;\n";
+		return fatherNode_rec(BinaryTree<int>::root, n2)->data;
+	}
+	else if (!(search(n2))) {
+		cout << endl << n2 << " isn`t in node of tree;\n";
+		return fatherNode_rec(BinaryTree<int>::root, n1)->data;
+	}
+	else return commonAncestor_rec(BinaryTree<int>::root, n1, n2)->data;
+}
+
+template<>
+TNode<int>* BalanceBinarySearchTree<int>::commonAncestor_rec(TNode<int>* p, int n1, int n2) {
+	if ((p->data > n1 && p->data < n2) || (p->data < n1 && p->data > n2)) return p;
+	if (p->data < n1) return commonAncestor_rec(p->right, n1, n2);
+	return commonAncestor_rec(p->left, n1, n2);
+}
+
+string BalanceBinarySearchTree<string>::commonAncestor(string s1, string s2) {
+	if (BinaryTree<string>::root == NULL || (!(search(s1)) && !(search(s2)))) {
+		cout << "\n\nError\n";
+		return "-10000";
+	}
+	else if (!(search(s1))) {
+		cout << endl << s1 << " isn`t in node of tree;\n";
+		return fatherNode_rec(BinaryTree<string>::root, s2)->data;
+	}
+	else if (!(search(s2))) {
+		cout << endl << s2 << " isn`t in node of tree;\n";
+		return fatherNode_rec(BinaryTree<string>::root, s1)->data;
+	}
+	else return commonAncestor_rec(BinaryTree<string>::root, s1, s2)->data;
+}
+
+template<>
+TNode<string>* BalanceBinarySearchTree<string>::commonAncestor_rec(TNode<string>* p, string s1, string s2) {
+	if ((p->data > s1 && p->data < s2) || (p->data < s1 && p->data > s2)) return p;
+	if (p->data < s1) return commonAncestor_rec(p->right, s1, s2);
+	return commonAncestor_rec(p->left, s1, s2);
 }
 
 int main()
