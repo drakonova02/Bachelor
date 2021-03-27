@@ -156,6 +156,10 @@ protected:
 	void countNode_rec(TNode<T>* p, int& sum);
 	void sumKeys_rec(TNode<int>* p, int& sum);
 	void deleteEven_rec(TNode<int>* p);
+	int findMax(TNode<int>* p);
+	int findMin(TNode<int>* p);
+	void findMiddle_rec(TNode<int>* p, int mid, int n, int& node);
+
 public:
 	BalanceBinarySearchTree() :BinaryTree<T>() {}  // Base class constructor is used.
 	void addNode(T item);
@@ -166,6 +170,7 @@ public:
 	int countNode();
 	int sumKeys();
 	void deleteEven();
+	int findMiddle();
 };
 
 // addNode
@@ -410,6 +415,47 @@ void BalanceBinarySearchTree<int>::deleteEven_rec(TNode<int>* p) {
 	}
 }
 
+//5findMiddle
+template<>
+int BalanceBinarySearchTree<int>::findMiddle() {
+	int mid = (findMax(BinaryTree<int>::root) + findMin(BinaryTree<int>::root)) / 2;
+	if (search(mid)) return mid;
+	int n = abs(BinaryTree<int>::root->data - mid);
+	int node = BinaryTree<int>::root->data;
+	findMiddle_rec(BinaryTree<int>::root, mid, n, node);
+	return node;
+}
+
+template<>
+int BalanceBinarySearchTree<int>::findMax(TNode<int>* p) {
+	while (p->right != NULL) p = p->right;
+	return p->data;
+}
+
+template<>
+int BalanceBinarySearchTree<int>::findMin(TNode<int>* p) {
+	while (p->left != NULL) p = p->left;
+	return p->data;
+}
+
+template<>
+void BalanceBinarySearchTree<int>::findMiddle_rec(TNode<int>* p, int mid, int n, int& node) {
+	if (p == NULL) return;
+	else if (p->data > mid) {
+		if (abs(p->data - mid) < n) {
+			n = abs(p->data - mid);
+			node = p->data;
+		}
+		findMiddle_rec(p->left, mid, n, node);
+	}
+	else {
+		if (abs(p->data - mid) < n) {
+			n = abs(p->data - mid);
+			node = p->data;
+		}
+		findMiddle_rec(p->right, mid, n, node);
+	}
+}
 
 int main()
 {
