@@ -163,7 +163,7 @@ protected:
 	void copyBBST_rec(TNode<T>* p, BalanceBinarySearchTree<T>& copy);
 	void addcopy(int item);
 	TNode<T>* addcopy_rec(int item, TNode<T>* p);
-
+	void insertBBST_rec(TNode<T>* p);
 public:
 	BalanceBinarySearchTree() :BinaryTree<T>() {}  // Base class constructor is used.
 	void addNode(T item);
@@ -177,6 +177,7 @@ public:
 	int findMiddle();
 	int findSecondLargest();
 	BalanceBinarySearchTree<T> copyBBST();
+	void insertBBST(BalanceBinarySearchTree<T>B);
 };
 
 // addNode
@@ -515,6 +516,22 @@ TNode<T>* BalanceBinarySearchTree<T>::addcopy_rec(int item, TNode<T>* p) {
 	else p->height = height(p->right) + 1;
 	return p;
 }
+
+//8insertBBST
+template<typename T>
+void BalanceBinarySearchTree<T>::insertBBST(BalanceBinarySearchTree<T>B) {
+	insertBBST_rec(B.root);
+}
+
+template<typename T>
+void BalanceBinarySearchTree<T>::insertBBST_rec(TNode<T>* p) {
+	if (p != NULL) {
+		addNode(p->data);
+		insertBBST_rec(p->right);
+		insertBBST_rec(p->left);
+	}
+}
+
 
 int main()
 {
