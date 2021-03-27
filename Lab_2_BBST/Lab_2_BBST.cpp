@@ -159,6 +159,7 @@ protected:
 	int findMax(TNode<int>* p);
 	int findMin(TNode<int>* p);
 	void findMiddle_rec(TNode<int>* p, int mid, int n, int& node);
+	TNode<int>* findSecondLargest_rec(TNode<int>* p, int max_node);
 
 public:
 	BalanceBinarySearchTree() :BinaryTree<T>() {}  // Base class constructor is used.
@@ -171,6 +172,7 @@ public:
 	int sumKeys();
 	void deleteEven();
 	int findMiddle();
+	int findSecondLargest();
 };
 
 // addNode
@@ -455,6 +457,26 @@ void BalanceBinarySearchTree<int>::findMiddle_rec(TNode<int>* p, int mid, int n,
 		}
 		findMiddle_rec(p->right, mid, n, node);
 	}
+}
+
+//6findSecondLargest()
+template<>
+int BalanceBinarySearchTree<int>::findSecondLargest() {
+	if (BinaryTree<int>::size_rec(BinaryTree<int>::root) == 2 && BinaryTree<int>::root->right == NULL) return BinaryTree<int>::root->left->data;
+	else if (BinaryTree<int>::root != NULL) {
+		int max_node = findMax(BinaryTree<int>::root);
+		return findSecondLargest_rec(BinaryTree<int>::root, max_node)->data;
+	}
+	else {
+		cout << "\n\nTree is empty\n";
+		return -10000;
+	}
+}
+
+template<>
+TNode<int>* BalanceBinarySearchTree<int>::findSecondLargest_rec(TNode<int>* p, int max_node) {
+	if (p->right->data == max_node) return p;
+	return findSecondLargest_rec(p->right, max_node);
 }
 
 int main()
