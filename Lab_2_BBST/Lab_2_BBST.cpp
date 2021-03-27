@@ -160,6 +160,9 @@ protected:
 	int findMin(TNode<int>* p);
 	void findMiddle_rec(TNode<int>* p, int mid, int n, int& node);
 	TNode<int>* findSecondLargest_rec(TNode<int>* p, int max_node);
+	void copyBBST_rec(TNode<T>* p, BalanceBinarySearchTree<T>& copy);
+	void addcopy(int item);
+	TNode<T>* addcopy_rec(int item, TNode<T>* p);
 
 public:
 	BalanceBinarySearchTree() :BinaryTree<T>() {}  // Base class constructor is used.
@@ -173,6 +176,7 @@ public:
 	void deleteEven();
 	int findMiddle();
 	int findSecondLargest();
+	BalanceBinarySearchTree<T> copyBBST();
 };
 
 // addNode
@@ -477,6 +481,39 @@ template<>
 TNode<int>* BalanceBinarySearchTree<int>::findSecondLargest_rec(TNode<int>* p, int max_node) {
 	if (p->right->data == max_node) return p;
 	return findSecondLargest_rec(p->right, max_node);
+}
+
+//7copyBBST
+template<typename T>
+BalanceBinarySearchTree<T> BalanceBinarySearchTree<T>::copyBBST() {
+	BalanceBinarySearchTree<T> copy;
+	copyBBST_rec(BalanceBinarySearchTree<T>::root, copy);
+	return copy;
+}
+
+template<typename T>
+void BalanceBinarySearchTree<T>::copyBBST_rec(TNode<T>* p, BalanceBinarySearchTree<T>& copy) {
+	if (p != NULL) {
+		copy.addcopy(p->data);
+		copyBBST_rec(p->right, copy);
+		copyBBST_rec(p->left, copy);
+	}
+}
+
+template <typename T>
+void BalanceBinarySearchTree<T>::addcopy(int item) {
+	if (search(item)) cout << endl << item << " is dublicate;\n";
+	else BinaryTree<T>::root = addcopy_rec(item, BinaryTree<T>::root);
+}
+
+template <typename T>
+TNode<T>* BalanceBinarySearchTree<T>::addcopy_rec(int item, TNode<T>* p) {
+	if (p == NULL) p = new TNode<T>(item);
+	else if (item < p->data) p->left = addcopy_rec(item, p->left);
+	else p->right = addcopy_rec(item, p->right);
+	if (height(p->left) > height(p->right)) p->height = height(p->left) + 1;
+	else p->height = height(p->right) + 1;
+	return p;
 }
 
 int main()
