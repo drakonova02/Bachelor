@@ -144,6 +144,7 @@ protected:
 	bool search_rec(T item, TNode<T>* p);
 	TNode<T>* deleteNode_rec(T item, TNode<T>* p);
 	TNode<T>* delete_NodeFound(TNode<T>* p);
+	void balance(TNode<T>*& p);
 public:
 	BalanceBinarySearchTree() :BinaryTree<T>() {}  // Base class constructor is used.
 	void addNode(T item);
@@ -220,6 +221,22 @@ TNode<T>* BalanceBinarySearchTree<T>::delete_NodeFound(TNode<T>* p) {
 		p->data = p1->data;
 		p->right = deleteNode_rec(p->data, p->right);
 		return p;
+	}
+}
+
+//balance
+template <typename T>
+void BalanceBinarySearchTree<T>::balance(TNode<T>*& p) {
+	if (p == NULL) return;
+
+	if (height(p->left) - height(p->right) > 1) {
+		if (height(p->left->left) >= height(p->left->right)) rotateLeftChild(p);
+		else doubleLeftChild(p);
+	}
+	else if (height(p->right) - height(p->left) > 1) {
+		if (height(p->right->right) >= height(p->right->left)) rotateRightChild(p);
+		else doubleRightChild(p);
+		p->height = max(height(p->left), height(p->right)) + 1;
 	}
 }
 
