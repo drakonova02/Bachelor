@@ -153,6 +153,7 @@ protected:
 	void doubleRightChild(TNode<T>*& p);
 	void printSorted_ascen(TNode<T>* p);
 	void printSorted_descen(TNode<T>* p);
+	void countNode_rec(TNode<T>* p, int& sum);
 public:
 	BalanceBinarySearchTree() :BinaryTree<T>() {}  // Base class constructor is used.
 	void addNode(T item);
@@ -160,6 +161,7 @@ public:
 	void deleteNode(T item);
 	void print();
 	void printSorted();
+	int countNode();
 };
 
 // addNode
@@ -347,6 +349,24 @@ void BalanceBinarySearchTree<T>::printSorted_descen(TNode<T>* p) {
 		cout << p->data << ", ";
 		printSorted_descen(p->left);
 	}
+}
+
+//2сountNode
+template<typename T>
+int BalanceBinarySearchTree<T>::countNode() {
+	int sum = 0;
+	if (BinaryTree<int>::root == NULL) return sum;
+	countNode_rec(BinaryTree<int>::root, sum);
+	return sum;
+}
+
+template<typename T>
+void BalanceBinarySearchTree<T>::countNode_rec(TNode<T>* p, int& sum) {
+	if (p->left != NULL) {
+		++sum;
+		countNode_rec(p->left, sum);
+	}
+	if (p->right != NULL) countNode_rec(p->right, sum);
 }
 
 int main()
