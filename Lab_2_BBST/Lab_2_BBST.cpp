@@ -167,6 +167,9 @@ protected:
 	void containsBBST_rec(TNode<T>* p, bool& a);
 	void equalsBBST_rec(TNode<T>* p, bool& a);
 	void symmetricalBBST_rec(TNode<T>* p);
+	TNode<int>* fatherNode_rec(TNode<int>* p, int n);
+	TNode<string>* fatherNode_rec(TNode<string>* p, string s);
+
 public:
 	BalanceBinarySearchTree() :BinaryTree<T>() {}  // Base class constructor is used.
 	void addNode(T item);
@@ -185,6 +188,8 @@ public:
 	bool equalsBBST(BalanceBinarySearchTree<T>B);
 	bool isBalanced();
 	BalanceBinarySearchTree<T> symmetricalBBST();
+	int fatherNode(int n);
+	string fatherNode(string s);
 };
 
 // addNode
@@ -605,6 +610,37 @@ void BalanceBinarySearchTree<T>::symmetricalBBST_rec(TNode<T>* p) {
 	symmetricalBBST_rec(p->left);
 }
 
+//13fatherNode
+template<>
+int BalanceBinarySearchTree<int>::fatherNode(int n) {
+	if (BinaryTree<int>::root != NULL && search(n)) return fatherNode_rec(BinaryTree<int>::root, n)->data;
+	else {
+		cout << "\n\nError\n";
+		return -10000;
+	}
+}
+
+template<>
+TNode<int>* BalanceBinarySearchTree<int>::fatherNode_rec(TNode<int>* p, int n) {
+	if (p->right->data == n || p->left->data == n) return p;
+	if (p->data < n) return fatherNode_rec(p->right, n);
+	return fatherNode_rec(p->left, n);
+}
+
+string BalanceBinarySearchTree<string>::fatherNode(string s) {
+	if (BinaryTree<string>::root != NULL && search(s)) return fatherNode_rec(BinaryTree<string>::root, s)->data;
+	else {
+		cout << "\n\nTree is empty\n";
+		return "-10000";
+	}
+}
+
+template<>
+TNode<string>* BalanceBinarySearchTree<string>::fatherNode_rec(TNode<string>* p, string s) {
+	if (p->right->data == s || p->left->data == s) return p;
+	if (p->data < s) return fatherNode_rec(p->right, s);
+	return fatherNode_rec(p->left, s);
+}
 
 int main()
 {
