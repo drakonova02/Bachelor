@@ -147,7 +147,10 @@ protected:
 	void balance(TNode<T>*& p);
 	void print_rec(TNode<string>* p, TNode<string>* following, int level);
 	void print_rec(TNode<int>* p, TNode<int>* following, int level);
-
+	void rotateLeftChild(TNode<T>*& p);
+	void rotateRightChild(TNode<T>*& p);
+	void doubleLeftChild(TNode<T>*& p);
+	void doubleRightChild(TNode<T>*& p);
 public:
 	BalanceBinarySearchTree() :BinaryTree<T>() {}  // Base class constructor is used.
 	void addNode(T item);
@@ -280,6 +283,39 @@ void BalanceBinarySearchTree<int>::print_rec(TNode<int>* p, TNode<int>* followin
 	if (p->left) print_rec(p->left, p, level);
 	else cout << endl;
 	if (p->right) print_rec(p->right, p, level);
+}
+
+//rotations
+template <typename T>
+void BalanceBinarySearchTree<T>::rotateLeftChild(TNode<T>*& p) {
+	TNode<T>* following = p->left;
+	p->left = following->right;
+	following->right = p;
+	p->height = max(height(p->left), height(p->right)) + 1;
+	following->height = max(height(following->left), p->height) + 1;
+	p = following;
+}
+
+template <typename T>
+void BalanceBinarySearchTree<T>::rotateRightChild(TNode<T>*& p) {
+	TNode<T>* following = p->right;
+	p->right = following->left;
+	following->left = p;
+	p->height = max(height(p->left), height(p->right)) + 1;
+	following->height = max(height(following->right), p->height) + 1;
+	p = following;
+}
+
+template <typename T>
+void BalanceBinarySearchTree<T>::doubleLeftChild(TNode<T>*& p) {
+	rotateRightChild(p->left);
+	rotateLeftChild(p);
+}
+
+template <typename T>
+void BalanceBinarySearchTree<T>::doubleRightChild(TNode<T>*& p) {
+	rotateLeftChild(p->right);
+	rotateRightChild(p);
 }
 
 int main()
