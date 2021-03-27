@@ -266,6 +266,22 @@ void BalanceBinarySearchTree<string>::print_rec(TNode<string>* p, TNode<string>*
 	if (p->right) print_rec(p->right, p, level);
 }
 
+template <>
+void BalanceBinarySearchTree<int>::print_rec(TNode<int>* p, TNode<int>* following, int level) {
+	int z = 0;
+	if (following != NULL) z = following->data;
+	while (z != 0) {
+		++level;
+		z /= 10;
+	}
+	for (int i = 0; i < level; ++i) cout << " ";
+	cout << p->data << " " << endl;
+	++level;
+	if (p->left) print_rec(p->left, p, level);
+	else cout << endl;
+	if (p->right) print_rec(p->right, p, level);
+}
+
 int main()
 {
    
