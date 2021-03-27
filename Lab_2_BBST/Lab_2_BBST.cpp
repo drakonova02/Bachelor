@@ -155,6 +155,7 @@ protected:
 	void printSorted_descen(TNode<T>* p);
 	void countNode_rec(TNode<T>* p, int& sum);
 	void sumKeys_rec(TNode<int>* p, int& sum);
+	void deleteEven_rec(TNode<int>* p);
 public:
 	BalanceBinarySearchTree() :BinaryTree<T>() {}  // Base class constructor is used.
 	void addNode(T item);
@@ -164,6 +165,7 @@ public:
 	void printSorted();
 	int countNode();
 	int sumKeys();
+	void deleteEven();
 };
 
 // addNode
@@ -388,6 +390,26 @@ void BalanceBinarySearchTree<int>::sumKeys_rec(TNode<int>* p, int& sum) {
 	}
 	if (p->left != NULL) sumKeys_rec(p->left, sum);
 }
+
+//4deleteEven
+template<>
+void BalanceBinarySearchTree<int>::deleteEven() {
+	deleteEven_rec(BinaryTree<int>::root);
+}
+
+template<>
+void BalanceBinarySearchTree<int>::deleteEven_rec(TNode<int>* p) {
+	if (p != NULL) {
+		if (p->data % 2 == 0) {
+			deleteNode(p->data);
+			p = BinaryTree<int>::root;
+			deleteEven_rec(p);
+		}
+		deleteEven_rec(p->right);
+		deleteEven_rec(p->left);
+	}
+}
+
 
 int main()
 {
