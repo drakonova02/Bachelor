@@ -140,11 +140,29 @@ int BinaryTree<T>::size_rec(TNode<T>* p) {
 template <typename T>
 class BalanceBinarySearchTree : public BinaryTree<T> {
 protected:
-	
+	TNode<T>* addNode_rec(T item, TNode<T>* p);
 public:
-	
+	BalanceBinarySearchTree() :BinaryTree<T>() {}  // Base class constructor is used.
+	void addNode(T item);
 };
 
+// addNode
+template <typename T>
+void BalanceBinarySearchTree<T>::addNode(T item) {
+	if (search(item)) cout << endl << item << " is dublicate;\n";
+	else BinaryTree<T>::root = addNode_rec(item, BinaryTree<T>::root);
+}
+
+template <typename T>
+TNode<T>* BalanceBinarySearchTree<T>::addNode_rec(T item, TNode<T>* p) {
+	if (p == NULL) p = new TNode<T>(item);
+	else if (item < p->data) p->left = addNode_rec(item, p->left);
+	else p->right = addNode_rec(item, p->right);
+	if (height(p->left) > height(p->right)) p->height = height(p->left) + 1;
+	else p->height = height(p->right) + 1;
+	balance(p);
+	return p;
+}
 
 int main()
 {
