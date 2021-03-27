@@ -165,7 +165,7 @@ protected:
 	TNode<T>* addcopy_rec(int item, TNode<T>* p);
 	void insertBBST_rec(TNode<T>* p);
 	void containsBBST_rec(TNode<T>* p, bool& a);
-
+	void equalsBBST_rec(TNode<T>* p, bool& a);
 public:
 	BalanceBinarySearchTree() :BinaryTree<T>() {}  // Base class constructor is used.
 	void addNode(T item);
@@ -181,7 +181,8 @@ public:
 	BalanceBinarySearchTree<T> copyBBST();
 	void insertBBST(BalanceBinarySearchTree<T>B);
 	bool сontainsBBST(BalanceBinarySearchTree<T>B);
-
+	bool equalsBBST(BalanceBinarySearchTree<T>B);
+	bool isBalanced();
 };
 
 // addNode
@@ -554,6 +555,35 @@ void BalanceBinarySearchTree<T>::containsBBST_rec(TNode<T>* p, bool& a) {
 	}
 }
 
+//10isBalanced
+template<typename T>
+bool BalanceBinarySearchTree<T>::isBalanced() {
+	if (abs(height(BalanceBinarySearchTree<T>::root->left) - height(BalanceBinarySearchTree<T>::root->right)) > 1) return false;
+	return true;
+}
+
+//11equalsBBST
+template<typename T>
+bool BalanceBinarySearchTree<T>::equalsBBST(BalanceBinarySearchTree<T> B) {
+	if (B.root == NULL || BalanceBinarySearchTree<T>::root == NULL) return false;
+	int s1 = B.BinaryTree<T>::size();
+	int s2 = BinaryTree<T>::size();
+	if (s1 == s2) {
+		bool a = true;
+		equalsBBST_rec(B.root, a);
+		return a;
+	}
+	return false;
+}
+
+template<typename T>
+void BalanceBinarySearchTree<T>::equalsBBST_rec(TNode<T>* p, bool& a) {
+	if (a && p != NULL) {
+		equalsBBST_rec(p->right, a);
+		equalsBBST_rec(p->left, a);
+		if (!(search(p->data))) a = false;
+	}
+}
 
 int main()
 {
