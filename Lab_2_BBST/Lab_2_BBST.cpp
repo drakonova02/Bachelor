@@ -164,6 +164,8 @@ protected:
 	void addcopy(int item);
 	TNode<T>* addcopy_rec(int item, TNode<T>* p);
 	void insertBBST_rec(TNode<T>* p);
+	void containsBBST_rec(TNode<T>* p, bool& a);
+
 public:
 	BalanceBinarySearchTree() :BinaryTree<T>() {}  // Base class constructor is used.
 	void addNode(T item);
@@ -178,6 +180,8 @@ public:
 	int findSecondLargest();
 	BalanceBinarySearchTree<T> copyBBST();
 	void insertBBST(BalanceBinarySearchTree<T>B);
+	bool сontainsBBST(BalanceBinarySearchTree<T>B);
+
 };
 
 // addNode
@@ -529,6 +533,24 @@ void BalanceBinarySearchTree<T>::insertBBST_rec(TNode<T>* p) {
 		addNode(p->data);
 		insertBBST_rec(p->right);
 		insertBBST_rec(p->left);
+	}
+}
+
+//9сontainsBBST()
+template<typename T>
+bool BalanceBinarySearchTree<T>::сontainsBBST(BalanceBinarySearchTree<T>B) {
+	if (B.root == NULL) return false;
+	bool a = true;
+	containsBBST_rec(B.root, a);
+	return a;
+}
+
+template<typename T>
+void BalanceBinarySearchTree<T>::containsBBST_rec(TNode<T>* p, bool& a) {
+	if (a) {
+		insertBBST_rec(p->right);
+		insertBBST_rec(p->left);
+		if (!(search(p->data))) a = false;
 	}
 }
 
