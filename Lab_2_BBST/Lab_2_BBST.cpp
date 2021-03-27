@@ -166,6 +166,7 @@ protected:
 	void insertBBST_rec(TNode<T>* p);
 	void containsBBST_rec(TNode<T>* p, bool& a);
 	void equalsBBST_rec(TNode<T>* p, bool& a);
+	void symmetricalBBST_rec(TNode<T>* p);
 public:
 	BalanceBinarySearchTree() :BinaryTree<T>() {}  // Base class constructor is used.
 	void addNode(T item);
@@ -183,6 +184,7 @@ public:
 	bool сontainsBBST(BalanceBinarySearchTree<T>B);
 	bool equalsBBST(BalanceBinarySearchTree<T>B);
 	bool isBalanced();
+	BalanceBinarySearchTree<T> symmetricalBBST();
 };
 
 // addNode
@@ -584,6 +586,25 @@ void BalanceBinarySearchTree<T>::equalsBBST_rec(TNode<T>* p, bool& a) {
 		if (!(search(p->data))) a = false;
 	}
 }
+
+//12symmetricalBBST
+template<typename T>
+BalanceBinarySearchTree<T> BalanceBinarySearchTree<T>::symmetricalBBST() {
+	BalanceBinarySearchTree<T> symmet = copyBBST();
+	symmetricalBBST_rec(symmet.root);
+	return symmet;
+}
+
+template<typename T>
+void BalanceBinarySearchTree<T>::symmetricalBBST_rec(TNode<T>* p) {
+	if (p == NULL) return;
+	TNode<T>* temp = p->right;
+	p->right = p->left;
+	p->left = temp;
+	symmetricalBBST_rec(p->right);
+	symmetricalBBST_rec(p->left);
+}
+
 
 int main()
 {
