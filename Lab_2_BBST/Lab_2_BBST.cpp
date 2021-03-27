@@ -145,11 +145,15 @@ protected:
 	TNode<T>* deleteNode_rec(T item, TNode<T>* p);
 	TNode<T>* delete_NodeFound(TNode<T>* p);
 	void balance(TNode<T>*& p);
+	void print_rec(TNode<string>* p, TNode<string>* following, int level);
+	void print_rec(TNode<int>* p, TNode<int>* following, int level);
+
 public:
 	BalanceBinarySearchTree() :BinaryTree<T>() {}  // Base class constructor is used.
 	void addNode(T item);
 	bool search(T item);
 	void deleteNode(T item);
+	void print();
 };
 
 // addNode
@@ -238,6 +242,28 @@ void BalanceBinarySearchTree<T>::balance(TNode<T>*& p) {
 		else doubleRightChild(p);
 		p->height = max(height(p->left), height(p->right)) + 1;
 	}
+}
+
+//print
+template <typename T>
+void BalanceBinarySearchTree<T>::print() {
+	cout << endl;
+	if (BinaryTree<T>::isEmpty()) cout << "tree is empty\n";
+	else {
+		print_rec(BinaryTree<T>::root, NULL, 0);
+		cout << "\n";
+	}
+}
+
+template <>
+void BalanceBinarySearchTree<string>::print_rec(TNode<string>* p, TNode<string>* following, int level) {
+	if (following != NULL) level += (following->data).length();
+	for (int i = 0; i < level; ++i) cout << ' ';
+	cout << p->data << endl;
+	++level;
+	if (p->left) print_rec(p->left, p, level);
+	else cout << endl;
+	if (p->right) print_rec(p->right, p, level);
 }
 
 int main()
