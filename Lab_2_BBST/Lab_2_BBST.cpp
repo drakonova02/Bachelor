@@ -141,9 +141,11 @@ template <typename T>
 class BalanceBinarySearchTree : public BinaryTree<T> {
 protected:
 	TNode<T>* addNode_rec(T item, TNode<T>* p);
+	bool search_rec(T item, TNode<T>* p);
 public:
 	BalanceBinarySearchTree() :BinaryTree<T>() {}  // Base class constructor is used.
 	void addNode(T item);
+	bool search(T item);
 };
 
 // addNode
@@ -162,6 +164,20 @@ TNode<T>* BalanceBinarySearchTree<T>::addNode_rec(T item, TNode<T>* p) {
 	else p->height = height(p->right) + 1;
 	balance(p);
 	return p;
+}
+
+//search
+template <typename T>
+bool BalanceBinarySearchTree<T>::search(T item) {
+	return search_rec(item, BinaryTree<T>::root);
+}
+
+template <typename T>
+bool BalanceBinarySearchTree<T>::search_rec(T item, TNode<T>* p) {
+	if (p == NULL)		return false;
+	if (p->data == item)	return true;
+	else if (p->data > item)	 return search_rec(item, p->left);
+	else return search_rec(item, p->right);
 }
 
 int main()
