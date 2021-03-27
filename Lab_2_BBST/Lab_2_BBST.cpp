@@ -142,10 +142,13 @@ class BalanceBinarySearchTree : public BinaryTree<T> {
 protected:
 	TNode<T>* addNode_rec(T item, TNode<T>* p);
 	bool search_rec(T item, TNode<T>* p);
+	TNode<T>* deleteNode_rec(T item, TNode<T>* p);
+	TNode<T>* delete_NodeFound(TNode<T>* p);
 public:
 	BalanceBinarySearchTree() :BinaryTree<T>() {}  // Base class constructor is used.
 	void addNode(T item);
 	bool search(T item);
+	void deleteNode(T item);
 };
 
 // addNode
@@ -178,6 +181,46 @@ bool BalanceBinarySearchTree<T>::search_rec(T item, TNode<T>* p) {
 	if (p->data == item)	return true;
 	else if (p->data > item)	 return search_rec(item, p->left);
 	else return search_rec(item, p->right);
+}
+
+//DeleteNode
+template <typename T>
+void BalanceBinarySearchTree<T>::deleteNode(T item) {
+	if (search(item)) BinaryTree<T>::root = deleteNode_rec(item, BinaryTree<T>::root);
+	else cout << "Item not foud: item not deleted\n";
+}
+
+template <typename T>
+TNode<T>* BalanceBinarySearchTree<T>::deleteNode_rec(T item, TNode<T>* p) {
+	if (item < p->data)		p->left = deleteNode_rec(item, p->left);
+	else  if (item > p->data)	p->right = deleteNode_rec(item, p->right);
+	else p = delete_NodeFound(p);
+	balance(p);
+	return p;
+}
+
+template <typename T>
+TNode<T>* BalanceBinarySearchTree<T>::delete_NodeFound(TNode<T>* p) {
+	if (p->left == NULL) {
+		TNode<T>* temp = p;
+		p = p->right;
+		delete temp;
+		return p;
+	}
+	else if (p->right == NULL) {
+		TNode<T>* temp = p;
+		p = p->left;
+		delete temp;
+		return p;
+	}
+	else
+	{
+		TNode<T>* p1 = p->right;
+		while (p1->left != NULL) p1 = p1->left;
+		p->data = p1->data;
+		p->right = deleteNode_rec(p->data, p->right);
+		return p;
+	}
 }
 
 int main()
