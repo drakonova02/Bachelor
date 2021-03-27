@@ -154,6 +154,7 @@ protected:
 	void printSorted_ascen(TNode<T>* p);
 	void printSorted_descen(TNode<T>* p);
 	void countNode_rec(TNode<T>* p, int& sum);
+	void sumKeys_rec(TNode<int>* p, int& sum);
 public:
 	BalanceBinarySearchTree() :BinaryTree<T>() {}  // Base class constructor is used.
 	void addNode(T item);
@@ -162,6 +163,7 @@ public:
 	void print();
 	void printSorted();
 	int countNode();
+	int sumKeys();
 };
 
 // addNode
@@ -367,6 +369,24 @@ void BalanceBinarySearchTree<T>::countNode_rec(TNode<T>* p, int& sum) {
 		countNode_rec(p->left, sum);
 	}
 	if (p->right != NULL) countNode_rec(p->right, sum);
+}
+
+//3sumKeys
+template<>
+int BalanceBinarySearchTree<int>::sumKeys() {
+	int sum = 0;
+	if (BinaryTree<int>::root == NULL) return sum;
+	sumKeys_rec(BinaryTree<int>::root, sum);
+	return sum;
+}
+
+template<>
+void BalanceBinarySearchTree<int>::sumKeys_rec(TNode<int>* p, int& sum) {
+	if (p->right != NULL) {
+		sum += p->right->data;
+		sumKeys_rec(p->right, sum);
+	}
+	if (p->left != NULL) sumKeys_rec(p->left, sum);
 }
 
 int main()
