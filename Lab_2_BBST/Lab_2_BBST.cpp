@@ -1,20 +1,152 @@
-﻿// Lab_2_BBST.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
+﻿#include<iostream>
+#include<string>
 
-#include <iostream>
+using namespace std;
+
+//BinaryTree starts
+template <typename T>
+struct TNode {
+	T data;  //data members
+	TNode<T>* left;
+	TNode<T>* right;
+	// constructor
+	TNode(T d);
+	int height;
+};
+
+template <typename T>
+class BinaryTree {
+public:
+	BinaryTree();// constructor
+	bool isEmpty() { return root == NULL; }
+	void preorder();
+	void inorder();
+	void postorder();
+	void makeEmpty();
+	int size() { return size_rec(root); }
+protected:
+	TNode<T>* root;
+	void preorder_rec(TNode<T>* p);
+	void inorder_rec(TNode<T>* p);
+	void postorder_rec(TNode<T>* p);
+	int size_rec(TNode<T>* p);
+	void makeEmpty_rec(TNode<T>* p);
+};//class BinaryTree
+
+template <typename T>
+BinaryTree<T> ::BinaryTree() {
+	root = NULL;
+}
+
+//constructor of TNode
+template <typename T>
+TNode<T>::TNode(T item) {
+	data = item;
+	left = right = NULL;
+	height = 0;
+}
+
+template <typename T>
+int height(TNode<T>* p) {
+	return p == NULL ? -1 : p->height;
+}
+
+//preorder
+template <typename T>
+void BinaryTree<T>::preorder() {
+	cout << "preorder sequence of nodes: \n";
+	if (isEmpty())	cout << "tree is empty\n";
+	else {
+		preorder_rec(root);
+		cout << "\n";
+	}
+}
+
+template <typename T>
+void BinaryTree<T>::preorder_rec(TNode<T>* p) {
+	if (p != NULL) {
+		cout << p->data << ", ";
+		preorder_rec(p->left);
+		preorder_rec(p->right);
+	}
+}
+
+//inorder
+template <typename T>
+void BinaryTree<T>::inorder() {
+	cout << "inorder sequence of nodes: \n";
+	if (isEmpty()) cout << "tree is empty\n";
+	else {
+		inorder_rec(root);
+		cout << "\n";
+	}
+}
+
+template <typename T>
+void BinaryTree<T>::inorder_rec(TNode<T>* p) {
+	if (p != NULL) {
+		inorder_rec(p->left);
+		cout << p->data << ", ";
+		inorder_rec(p->right);
+	}
+}
+
+//postorser
+template <typename T>
+void BinaryTree<T>::postorder() {
+	cout << "postorder sequence of nodes: \n";
+	if (isEmpty()) cout << "tree is empty\n";
+	else {
+		postorder_rec(root);
+		cout << "\n";
+	}
+}
+
+template <typename T>
+void BinaryTree<T>::postorder_rec(TNode<T>* p) {
+	if (p != NULL) {
+		postorder_rec(p->left);
+		postorder_rec(p->right);
+		cout << p->data << ", ";
+	}
+}
+
+//makeEmpty	
+template <typename T>
+void BinaryTree<T>::makeEmpty() {
+	TNode<T>* p = root;
+	makeEmpty_rec(p);
+	root = NULL;
+}
+
+template <typename T>
+void BinaryTree<T>::makeEmpty_rec(TNode<T>* p) {
+	if (p != NULL) {
+		makeEmpty_rec(p->left);
+		makeEmpty_rec(p->right);
+		delete p;
+	}
+}
+
+template <typename T>
+int BinaryTree<T>::size_rec(TNode<T>* p) {
+	if (p == NULL)	return 0;
+	else return size_rec(p->left) + size_rec(p->right) + 1;
+}
+
+//BinaryTree finished
+/////////////////////////////////////////////////////////////////////////////////////////////
+//BalanceBinarySearchTree started
+template <typename T>
+class BalanceBinarySearchTree : public BinaryTree<T> {
+protected:
+	
+public:
+	
+};
+
 
 int main()
 {
-    std::cout << "Hello World!\n";
+   
 }
-
-// Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
-// Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
-
-// Советы по началу работы 
-//   1. В окне обозревателя решений можно добавлять файлы и управлять ими.
-//   2. В окне Team Explorer можно подключиться к системе управления версиями.
-//   3. В окне "Выходные данные" можно просматривать выходные данные сборки и другие сообщения.
-//   4. В окне "Список ошибок" можно просматривать ошибки.
-//   5. Последовательно выберите пункты меню "Проект" > "Добавить новый элемент", чтобы создать файлы кода, или "Проект" > "Добавить существующий элемент", чтобы добавить в проект существующие файлы кода.
-//   6. Чтобы снова открыть этот проект позже, выберите пункты меню "Файл" > "Открыть" > "Проект" и выберите SLN-файл.
