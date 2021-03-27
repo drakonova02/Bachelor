@@ -695,5 +695,20 @@ TNode<string>* BalanceBinarySearchTree<string>::commonAncestor_rec(TNode<string>
 
 int main()
 {
-   
+	BalanceBinarySearchTree<int> A;
+
+	A.addNode(15);
+	A.addNode(10);
+	A.addNode(7);
+	A.addNode(50);
+	A.addNode(12);
+	A.addNode(11);
+	A.addNode(12);
+	A.addNode(13);
+	A.addNode(55);
+	A.addNode(14);
+	A.print();
+	A.inorder();
+	A.preorder();
+	A.postorder();
 }
