@@ -151,12 +151,15 @@ protected:
 	void rotateRightChild(TNode<T>*& p);
 	void doubleLeftChild(TNode<T>*& p);
 	void doubleRightChild(TNode<T>*& p);
+	void printSorted_ascen(TNode<T>* p);
+	void printSorted_descen(TNode<T>* p);
 public:
 	BalanceBinarySearchTree() :BinaryTree<T>() {}  // Base class constructor is used.
 	void addNode(T item);
 	bool search(T item);
 	void deleteNode(T item);
 	void print();
+	void printSorted();
 };
 
 // addNode
@@ -319,6 +322,32 @@ void BalanceBinarySearchTree<T>::doubleRightChild(TNode<T>*& p) {
 }
 
 //additional metods
+//1printSorted
+template<typename T>
+void BalanceBinarySearchTree<T>::printSorted() {
+	cout << "\n\nAscending order: \n";
+	printSorted_ascen(BinaryTree<T>::root);
+	cout << "\nDescending order: \n";
+	printSorted_descen(BinaryTree<T>::root);
+}
+
+template<typename T>
+void BalanceBinarySearchTree<T>::printSorted_ascen(TNode<T>* p) {
+	if (p != NULL) {
+		printSorted_ascen(p->left);
+		cout << p->data << ", ";
+		printSorted_ascen(p->right);
+	}
+}
+
+template<typename T>
+void BalanceBinarySearchTree<T>::printSorted_descen(TNode<T>* p) {
+	if (p != NULL) {
+		printSorted_descen(p->right);
+		cout << p->data << ", ";
+		printSorted_descen(p->left);
+	}
+}
 
 int main()
 {
