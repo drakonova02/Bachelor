@@ -43,6 +43,10 @@ bool List::isFull() {
 	return (last == max - 1);
 }
 
+bool List::isEmpty() {
+	return(last == 0);
+}
+
 
 
 void main()
