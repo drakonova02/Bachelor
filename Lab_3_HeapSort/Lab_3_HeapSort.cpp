@@ -47,7 +47,9 @@ bool List::isEmpty() {
 	return(last == 0);
 }
 
-
+int List::length() {
+	return last;
+}
 
 void main()
 {
