@@ -25,11 +25,20 @@ protected:
 	void settleRoot(int root, int last); //used in heapSort
 };
 
+//constructor List
 List::List(int n) {
 	max = n + 1; //max number of element + arr[0] isn`t used
 	last = 0;
 	arr = new int[max]; // create dynamic array
 }
+
+//destructor List
+List::~List() {
+	delete []arr;
+	last = 0;
+}
+
+
 
 void main()
 {
