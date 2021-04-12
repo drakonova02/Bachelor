@@ -55,7 +55,13 @@ void List::makeEmpty(){
 	last = 0;
 }
 
-
+void List::addItem(int item) {
+	if (!(isFull())) {
+		cout << "List overflow: item cannot be added.\n";
+			return;
+	}
+	arr[++last] = item;
+}
 
 void main()
 {
