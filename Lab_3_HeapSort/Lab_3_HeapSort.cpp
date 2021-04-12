@@ -15,7 +15,7 @@ public:
 	int deleteItem(int item); //It deletes and returns an item.
 	void printList();
 	void HeapSort();
-	void printHeap();
+	void printHeap(int index, int last = -1, int level = 0);
 
 protected:
 	int max; //array size
@@ -105,6 +105,10 @@ void List::swap(int index1, int index2) {
 }
 
 void List::HeapSort(){	
+	if (isEmpty) {
+		cout << "List is Empty.\n";
+		return;
+	}
 	cout << "Do you want to sort List in ascending or descending orders?\nIf in ascending order - input '1', else '0'\n\n";
 	int order;
 	cin >> order;
@@ -143,6 +147,7 @@ void List::settleRoot_asc(int root_index, int last_index){
 		}
 		else break;
 	}//while
+	printHeap(1);
 }
 
 void List::settleRoot_des(int root_index, int last_index) {
@@ -160,9 +165,25 @@ void List::settleRoot_des(int root_index, int last_index) {
 		}
 		else break;
 	}//while
+	printHeap(1);
 }
 
+void List::printHeap(int index, int last = -1, int level = 0) {
+	int z = 0;
+	int level = 0;
+	if (last != -1) z = arr[last];
+	while (z != 0) {
+		++level;
+		z /= 10;
+	}
+	for (int i = 0; i < level; ++i) cout << " ";
+	cout << arr[index] << " " << endl;
+	++level;
+	if (2*index) printHeap(2 * index, index, level);
+	else cout << endl;
+	if (2*index + 1) printHeap(2 * index + 1, index, level);
 
+}
 
 void main()
 {
