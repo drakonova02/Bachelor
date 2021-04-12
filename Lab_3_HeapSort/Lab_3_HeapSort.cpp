@@ -21,6 +21,7 @@ protected:
 	int last; //index of the last list item
 	//Note: element[0] is not used.
 	int* arr; //pointer to the first element of a dynamic array
+	int search(int item); //search item in array.
 	void swap(int item1, int item2);
 	void settleRoot(int root, int last); //used in heapSort
 };
@@ -61,6 +62,26 @@ void List::addItem(int item) {
 			return;
 	}
 	arr[++last] = item;
+}
+
+int List::search(int item) {
+	for (int i = 1; i < max; ++i) if (item == arr[i]) return i;
+	return -1;
+}
+
+int List::deleteItem(int item) {
+	if (isEmpty()) {
+		cout << "List is empty: item cannot be deleted.\n";
+		return;
+	}
+	if (search(item) == -1) {
+		cout << "Item isn`t in List.\n";
+		return;
+	}
+	while (search(item)) {
+		int temp = arr[search(item)];
+
+	}
 }
 
 void main()
