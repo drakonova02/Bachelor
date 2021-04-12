@@ -5,7 +5,7 @@ using namespace std;
 class List {
 
 public:
-	List(int = 10);
+	List(int n = 10);
 	~List();
 	bool isFull();
 	bool isEmpty();
@@ -13,7 +13,7 @@ public:
 	void makeEmpty();
 	void addItem(int item); //It inserts an item at the list end.
 	int deleteItem(int item); //It deletes and returns an item.
-	void printList();
+	void print();
 	void HeapSort();
 	void printHeap(int index = 1, int last_index = -1, int level = 0);
 
@@ -89,7 +89,7 @@ int List::deleteItem(int item) {
 	return item;
 }
 
-void List::printList() {
+void List::print() {
 	if (isEmpty()) {
 		cout << "List is Empty.\n";
 		return;
@@ -189,9 +189,23 @@ void List::printHeap(int index, int last_index, int level) {
 	if (2*index + 1 <= last) printHeap(2 * index + 1, index, level);
 }
 
+//Additional task #7
+struct Node{
+	int data_priority;
+	int data_value;
+	Node();
+};
+
+class priorityQeueue:public List {
+public:
+	priorityQeueue(int n = 10) :List(n) {};
+	void enqueue(); 
+	void dequeueMax();
+};
+
 void main()
 {
-	List A;
+	priorityQeueue A;
 	A.addItem(40);
 	A.addItem(30);
 	A.addItem(50);
@@ -199,7 +213,7 @@ void main()
 	A.addItem(70);
 	A.addItem(90);
 	A.addItem(20);
-	A.printList();
+	A.print();
 	A.HeapSort();
-	A.printList();
+	A.print();
 }
