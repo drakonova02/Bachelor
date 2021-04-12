@@ -22,7 +22,7 @@ protected:
 	//Note: element[0] is not used.
 	int* arr; //pointer to the first element of a dynamic array
 	int search(int item); //search item in array.
-	void swap(int item1, int item2);
+	void swap(int index1, int index2);
 	void settleRoot(int root, int last); //used in heapSort
 };
 
@@ -94,6 +94,12 @@ void List::printList() {
 	}
 	for (int i = 1; i <= last; ++i) cout << arr[i] << " ";
 	cout << endl;
+}
+
+void List::swap(int index1, int index2) {
+	int temp = arr[index1];
+	arr[index1] = arr[index2];
+	arr[index2] = temp;
 }
 
 void main()
