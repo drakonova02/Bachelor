@@ -1,20 +1,31 @@
-﻿// Lab_3_HeapSort.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
+﻿#include <iostream>
 
-#include <iostream>
+using namespace std;
 
-int main()
+class List {
+
+public:
+	List(int = 10);
+	~List();
+	bool isFull();
+	bool isEmpty();
+	int length(); //The number of list items is returned.
+	void makeEmpty();
+	void addItem(int item); //It inserts an item at the list end.
+	int deleteItem(int item); //It deletes and returns an item.
+	void printList();
+	void HeapSort();
+
+protected:
+	int max; //array size
+	int last; //index of the last list item
+	//Note: element[0] is not used.
+	int* array; //pointer to the first element of a dynamic array
+	void swap(int item1, int item2);
+	void settleRoot(int root, int last); //used in heapSort
+};
+
+void main()
 {
-    std::cout << "Hello World!\n";
+   
 }
-
-// Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
-// Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
-
-// Советы по началу работы 
-//   1. В окне обозревателя решений можно добавлять файлы и управлять ими.
-//   2. В окне Team Explorer можно подключиться к системе управления версиями.
-//   3. В окне "Выходные данные" можно просматривать выходные данные сборки и другие сообщения.
-//   4. В окне "Список ошибок" можно просматривать ошибки.
-//   5. Последовательно выберите пункты меню "Проект" > "Добавить новый элемент", чтобы создать файлы кода, или "Проект" > "Добавить существующий элемент", чтобы добавить в проект существующие файлы кода.
-//   6. Чтобы снова открыть этот проект позже, выберите пункты меню "Файл" > "Открыть" > "Проект" и выберите SLN-файл.
