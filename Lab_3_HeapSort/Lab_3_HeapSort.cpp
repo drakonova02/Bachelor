@@ -15,7 +15,7 @@ public:
 	int deleteItem(int item); //It deletes and returns an item.
 	void printList();
 	void HeapSort();
-	void printHeap(int index, int last = -1, int level = 0);
+	void printHeap(int index = 1, int last_index = -1, int level = 0);
 
 protected:
 	int max; //array size
@@ -109,25 +109,33 @@ void List::HeapSort(){
 		cout << "List is Empty.\n";
 		return;
 	}
-	cout << "Do you want to sort List in ascending or descending orders?\nIf in ascending order - input '1', else '0'\n\n";
+	cout << "\nDo you want to sort List in ascending or descending orders?\nIf in ascending order - input '1', else '0'\n";
 	int order;
 	cin >> order;
 	if (order == 1) {
 		for (int i = last / 2; i >= 1; --i)		// heap construction loop
 			settleRoot_asc(i, last);
+		printHeap();
+		cout << "//////////////////////////////\n";
 		for (int end = last - 1; end >= 1; --end)	// actual sorting loop
 		{
 			swap(1, end + 1);
 			settleRoot_asc(1, end);
+			printHeap();
+			cout << "//////////////////////////////\n";
 		}
 	}
 	else {
 		for (int i = last / 2; i >= 1; --i)		// heap construction loop
 			settleRoot_des(i, last);
+		printHeap();
+		cout << "//////////////////////////////\n";
 		for (int end = last - 1; end >= 1; --end)	// actual sorting loop
 		{
 			swap(1, end + 1);
 			settleRoot_des(1, end);
+			printHeap();
+			cout << "//////////////////////////////\n";
 		}
 	}
 }
@@ -147,14 +155,13 @@ void List::settleRoot_asc(int root_index, int last_index){
 		}
 		else break;
 	}//while
-	printHeap(1);
 }
 
 void List::settleRoot_des(int root_index, int last_index) {
 	int child, unsettled = root_index;
-	while (2 * unsettled >= last_index)	        // A current unsettled root is not a leaf.
+	while (2 * unsettled <= last_index)	        // A current unsettled root is not a leaf.
 	{
-		if (2 * unsettled > last_index &&    // The unsettled root has both children.
+		if (2 * unsettled < last_index &&    // The unsettled root has both children.
 			arr[2 * unsettled + 1] < arr[2 * unsettled])
 			child = 2 * unsettled + 1;	// The right child has a larger key.
 		else	child = 2 * unsettled;		// The left child has a larger key.
@@ -165,12 +172,11 @@ void List::settleRoot_des(int root_index, int last_index) {
 		}
 		else break;
 	}//while
-	printHeap(1);
 }
 
-void List::printHeap(int index, int last, int level) {
+void List::printHeap(int index, int last_index, int level) {
 	int z = 0;
-	if (last != -1) z = arr[last];
+	if (last_index != -1) z = arr[last_index];
 	while (z != 0) {
 		++level;
 		z /= 10;
@@ -178,10 +184,9 @@ void List::printHeap(int index, int last, int level) {
 	for (int i = 0; i < level; ++i) cout << " ";
 	cout << arr[index] << " " << endl;
 	++level;
-	if (2*index) printHeap(2 * index, index, level);
+	if (2*index <= last) printHeap(2 * index, index, level);
 	else cout << endl;
-	if (2*index + 1) printHeap(2 * index + 1, index, level);
-
+	if (2*index + 1 <= last) printHeap(2 * index + 1, index, level);
 }
 
 void main()
@@ -194,5 +199,7 @@ void main()
 	A.addItem(70);
 	A.addItem(90);
 	A.addItem(20);
+	A.printList();
+	A.HeapSort();
 	A.printList();
 }
