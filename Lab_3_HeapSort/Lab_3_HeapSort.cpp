@@ -23,8 +23,8 @@ protected:
 	int* arr; //pointer to the first element of a dynamic array
 	int search(int item); //search item in array.
 	void swap(int index1, int index2);
-	void settleRoot_asc(int root, int last); //used in heapSort for ascending order
-	void settleRoot_des(int root, int last); //used in heapSort for descending order
+	void settleRoot_asc(int root_index, int last_index); //used in heapSort for ascending order
+	void settleRoot_des(int root_index, int last_index); //used in heapSort for descending order
 };
 
 //constructor List
@@ -127,6 +127,39 @@ void List::HeapSort(){
 	}
 }
 
+void List::settleRoot_asc(int root_index, int last_index){
+	int child, unsettled = root_index;
+	while (2 * unsettled <= last_index)	        // A current unsettled root is not a leaf.
+	{
+		if (2 * unsettled < last_index &&    // The unsettled root has both children.
+			arr[2 * unsettled + 1] > arr[2 * unsettled])
+			child = 2 * unsettled + 1;	// The right child has a larger key.
+		else	child = 2 * unsettled;		// The left child has a larger key.
+		if (arr[unsettled] < arr[child])
+		{
+			swap(unsettled, child);
+			unsettled = child;
+		}
+		else break;
+	}//while
+}
+
+void List::settleRoot_des(int root_index, int last_index) {
+	int child, unsettled = root_index;
+	while (2 * unsettled >= last_index)	        // A current unsettled root is not a leaf.
+	{
+		if (2 * unsettled > last_index &&    // The unsettled root has both children.
+			arr[2 * unsettled + 1] < arr[2 * unsettled])
+			child = 2 * unsettled + 1;	// The right child has a larger key.
+		else	child = 2 * unsettled;		// The left child has a larger key.
+		if (arr[unsettled] > arr[child])
+		{
+			swap(unsettled, child);
+			unsettled = child;
+		}
+		else break;
+	}//while
+}
 
 void List::HeapSort() {
 	
