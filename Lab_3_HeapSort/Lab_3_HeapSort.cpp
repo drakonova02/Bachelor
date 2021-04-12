@@ -38,6 +38,11 @@ List::~List() {
 	last = 0;
 }
 
+//Create metods of class List
+bool List::isFull() {
+	return (last == max - 1);
+}
+
 
 
 void main()
