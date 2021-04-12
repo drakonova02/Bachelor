@@ -51,6 +51,12 @@ int List::length() {
 	return last;
 }
 
+void List::makeEmpty(){
+	last = 0;
+}
+
+
+
 void main()
 {
    
