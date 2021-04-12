@@ -59,7 +59,7 @@ void List::makeEmpty(){
 }
 
 void List::addItem(int item) {
-	if (!(isFull())) {
+	if (isFull()) {
 		cout << "List overflow: item cannot be added.\n";
 			return;
 	}
@@ -74,11 +74,11 @@ int List::search(int item) {
 int List::deleteItem(int item) {
 	if (isEmpty()) {
 		cout << "List is empty: item cannot be deleted.\n";
-		return;
+		return -10000;
 	}
 	if (search(item) == -1) {
 		cout << "Item isn`t in List.\n";
-		return;
+		return -10000;
 	}
 	int index = search(item);
 	while (index != -1) {
@@ -90,7 +90,7 @@ int List::deleteItem(int item) {
 }
 
 void List::printList() {
-	if (isEmpty) {
+	if (isEmpty()) {
 		cout << "List is Empty.\n";
 		return;
 	}
@@ -105,7 +105,7 @@ void List::swap(int index1, int index2) {
 }
 
 void List::HeapSort(){	
-	if (isEmpty) {
+	if (isEmpty()) {
 		cout << "List is Empty.\n";
 		return;
 	}
@@ -168,9 +168,8 @@ void List::settleRoot_des(int root_index, int last_index) {
 	printHeap(1);
 }
 
-void List::printHeap(int index, int last = -1, int level = 0) {
+void List::printHeap(int index, int last, int level) {
 	int z = 0;
-	int level = 0;
 	if (last != -1) z = arr[last];
 	while (z != 0) {
 		++level;
@@ -187,5 +186,13 @@ void List::printHeap(int index, int last = -1, int level = 0) {
 
 void main()
 {
-   
+	List A;
+	A.addItem(40);
+	A.addItem(30);
+	A.addItem(50);
+	A.addItem(80);
+	A.addItem(70);
+	A.addItem(90);
+	A.addItem(20);
+	A.printList();
 }
