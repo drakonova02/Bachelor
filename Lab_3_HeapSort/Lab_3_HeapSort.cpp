@@ -78,10 +78,13 @@ int List::deleteItem(int item) {
 		cout << "Item isn`t in List.\n";
 		return;
 	}
-	while (search(item)) {
-		int temp = arr[search(item)];
-
+	int index = search(item);
+	while (index != -1) {
+		int temp = arr[index];
+		arr[index] = arr[last--];
+		index = search(item);
 	}
+	return item;
 }
 
 void main()
