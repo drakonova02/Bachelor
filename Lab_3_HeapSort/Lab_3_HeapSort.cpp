@@ -102,6 +102,35 @@ void List::swap(int index1, int index2) {
 	arr[index2] = temp;
 }
 
+void List::HeapSort(){	
+	cout << "Do you want to sort List in ascending or descending orders?\nIf in ascending order - input '1', else '0'\n\n";
+	int order;
+	cin >> order;
+	if (order == 1) {
+		for (int i = last / 2; i >= 1; --i)		// heap construction loop
+			SettleRoot_asc(i, last);
+		for (int end = last - 1; end >= 1; --end)	// actual sorting loop
+		{
+			swap(1, end + 1);
+			SettleRoot_asc(1, end);
+		}
+	}
+	else {
+		for (int i = last / 2; i >= 1; --i)		// heap construction loop
+			SettleRoot_des(i, last);
+		for (int end = last - 1; end >= 1; --end)	// actual sorting loop
+		{
+			swap(1, end + 1);
+			SettleRoot_des(1, end);
+		}
+	}
+}
+
+
+void List::HeapSort() {
+	
+}
+
 void main()
 {
    
