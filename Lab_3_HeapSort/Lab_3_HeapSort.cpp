@@ -15,6 +15,7 @@ public:
 	int deleteItem(int item); //It deletes and returns an item.
 	void printList();
 	void HeapSort();
+	void printHeap();
 
 protected:
 	int max; //array size
@@ -161,9 +162,7 @@ void List::settleRoot_des(int root_index, int last_index) {
 	}//while
 }
 
-void List::HeapSort() {
-	
-}
+
 
 void main()
 {
