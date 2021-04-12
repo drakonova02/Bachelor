@@ -23,7 +23,8 @@ protected:
 	int* arr; //pointer to the first element of a dynamic array
 	int search(int item); //search item in array.
 	void swap(int index1, int index2);
-	void settleRoot(int root, int last); //used in heapSort
+	void settleRoot_asc(int root, int last); //used in heapSort for ascending order
+	void settleRoot_des(int root, int last); //used in heapSort for descending order
 };
 
 //constructor List
@@ -108,20 +109,20 @@ void List::HeapSort(){
 	cin >> order;
 	if (order == 1) {
 		for (int i = last / 2; i >= 1; --i)		// heap construction loop
-			SettleRoot_asc(i, last);
+			settleRoot_asc(i, last);
 		for (int end = last - 1; end >= 1; --end)	// actual sorting loop
 		{
 			swap(1, end + 1);
-			SettleRoot_asc(1, end);
+			settleRoot_asc(1, end);
 		}
 	}
 	else {
 		for (int i = last / 2; i >= 1; --i)		// heap construction loop
-			SettleRoot_des(i, last);
+			settleRoot_des(i, last);
 		for (int end = last - 1; end >= 1; --end)	// actual sorting loop
 		{
 			swap(1, end + 1);
-			SettleRoot_des(1, end);
+			settleRoot_des(1, end);
 		}
 	}
 }
