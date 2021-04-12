@@ -65,7 +65,7 @@ void List::addItem(int item) {
 }
 
 int List::search(int item) {
-	for (int i = 1; i < max; ++i) if (item == arr[i]) return i;
+	for (int i = 1; i <= last; ++i) if (item == arr[i]) return i;
 	return -1;
 }
 
@@ -85,6 +85,15 @@ int List::deleteItem(int item) {
 		index = search(item);
 	}
 	return item;
+}
+
+void List::printList() {
+	if (isEmpty) {
+		cout << "List is Empty.\n";
+		return;
+	}
+	for (int i = 1; i <= last; ++i) cout << arr[i] << " ";
+	cout << endl;
 }
 
 void main()
