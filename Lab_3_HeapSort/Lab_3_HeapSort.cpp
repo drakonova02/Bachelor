@@ -312,4 +312,10 @@ void main()
 	A.enqueue(20, 7);
 	A.print();
 	A.printHeap();
+	A.dequeueMax();
+	A.print();
+	A.printHeap();
+	A.makeEmpty();
+	cout << A.length() << endl;
+	A.print();
 }
