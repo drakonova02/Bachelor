@@ -205,9 +205,10 @@ class priorityQeueue:public List {
 public:
 	priorityQeueue(int n = 10);
 	void enqueue(int item, int priority); 
-	//void dequeueMax();
+	void dequeueMax();
 	void print();
 	void printHeap(int index = 1, int last_index = -1, int level = 0);
+	void settleRoot(int root_index, int last_index);
 
 protected:
 	Node* array;
@@ -215,7 +216,6 @@ protected:
 };
 
 //constructor priorityQeueue
-
 priorityQeueue::priorityQeueue(int n) {
 	max = n + 1; //max number of element + arr[0] isn`t used
 	last = 0;
@@ -228,6 +228,7 @@ Node::Node(int data, int priority) {
 	data_priority = priority;
 }
 
+//metods of priorityQeueue
 void priorityQeueue::swap(int index1, int index2) {
 	Node temp = array[index1];
 	array[index1] = array[index2];
@@ -239,15 +240,13 @@ void priorityQeueue::enqueue(int item, int priority){
 		cout << "Qeueue is overflow.\n";
 		return;
 	}
-	else {
-		int i = ++last;
-		array[i] = Node(item, priority);
-		while (i / 2 >= 1 && array[i / 2].data_priority < array[i].data_priority)  // i/2 gives an integer quotient.
-		{
-			swap(i, i / 2);
-			i = i / 2;
-		}//while
-	}//else
+	int i = ++last;
+	array[i] = Node(item, priority);
+	while (i / 2 >= 1 && array[i / 2].data_priority < array[i].data_priority)  // i/2 gives an integer quotient.
+	{
+		swap(i, i / 2);
+		i = i / 2;
+	}//while
 }
 
 void priorityQeueue::print() {
@@ -272,6 +271,33 @@ void priorityQeueue::printHeap(int index, int last_index, int level) {
 	if (2 * index <= last) printHeap(2 * index, index, level);
 	else cout << endl;
 	if (2 * index + 1 <= last) printHeap(2 * index + 1, index, level);
+}
+
+void priorityQeueue::dequeueMax(){
+	if (isEmpty()) {
+		cout << "Qeueue is Empty.\n";
+			return;
+	}
+	Node item = array[1];
+	array[1] = array[last--];
+	settleRoot(1, last);
+}
+
+void priorityQeueue::settleRoot(int root_index, int last_index) {
+	int child, unsettled = root_index;
+	while (2 * unsettled <= last_index)	        // A current unsettled root is not a leaf.
+	{
+		if (2 * unsettled < last_index &&    // The unsettled root has both children.
+			array[2 * unsettled + 1] > array[2 * unsettled])
+			child = 2 * unsettled + 1;	// The right child has a larger key.
+		else	child = 2 * unsettled;		// The left child has a larger key.
+		if (array[unsettled] < array[child])
+		{
+			swap(unsettled, child);
+			unsettled = child;
+		}
+		else break;
+	}//while
 }
 
 void main()
