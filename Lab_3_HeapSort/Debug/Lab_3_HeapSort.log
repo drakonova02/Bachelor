@@ -1,3 +1,5 @@
 ﻿  Lab_3_HeapSort.cpp
-C:\Users\Алеся\OneDrive\Документы\GitHub\Bachelor\Lab_3_HeapSort\Lab_3_HeapSort.cpp(207,1): warning C4326: возвращаемый тип "main" должен быть "int", а не "void"
-  Lab_3_HeapSort.vcxproj -> C:\Users\Алеся\OneDrive\Документы\GitHub\Bachelor\Lab_3_HeapSort\Debug\Lab_3_HeapSort.exe
+C:\Users\Алеся\OneDrive\Документы\GitHub\Bachelor\Lab_3_HeapSort\Lab_3_HeapSort.cpp(212,11): error C2352: List::search: недопустимый вызов нестатической функции-члена
+C:\Users\Алеся\OneDrive\Документы\GitHub\Bachelor\Lab_3_HeapSort\Lab_3_HeapSort.cpp(69): message : см. объявление "List::search"
+C:\Users\Алеся\OneDrive\Документы\GitHub\Bachelor\Lab_3_HeapSort\Lab_3_HeapSort.cpp(213,1): error C2059: синтаксическая ошибка: }
+C:\Users\Алеся\OneDrive\Документы\GitHub\Bachelor\Lab_3_HeapSort\Lab_3_HeapSort.cpp(215,1): warning C4326: возвращаемый тип "main" должен быть "int", а не "void"

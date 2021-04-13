@@ -16,13 +16,13 @@ public:
 	void print();
 	void HeapSort();
 	void printHeap(int index = 1, int last_index = -1, int level = 0);
+	int search(int item); //search item in array.
 
 protected:
 	int max; //array size
 	int last; //index of the last list item
 	//Note: element[0] is not used.
 	int* arr; //pointer to the first element of a dynamic array
-	int search(int item); //search item in array.
 	void swap(int index1, int index2);
 	void settleRoot_asc(int root_index, int last_index); //used in heapSort for ascending order
 	void settleRoot_des(int root_index, int last_index); //used in heapSort for descending order
@@ -193,7 +193,7 @@ void List::printHeap(int index, int last_index, int level) {
 struct Node{
 	int data_priority;
 	int data_value;
-	Node();
+	Node(int data, int priority);
 };
 
 class priorityQeueue:public List {
@@ -201,7 +201,16 @@ public:
 	priorityQeueue(int n = 10) :List(n) {};
 	void enqueue(); 
 	void dequeueMax();
+
+protected:
+
 };
+
+//constructor Node
+Node::Node(int data, int priority) {
+	data_value = data;
+	data_priority = priority;
+}
 
 void main()
 {
