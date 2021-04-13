@@ -204,6 +204,7 @@ struct Node{
 class priorityQeueue:public List {
 public:
 	priorityQeueue(int n = 10);
+	~priorityQeueue() { delete[]array; last = 0;};
 	void enqueue(int item, int priority); 
 	void dequeueMax();
 	void print();
