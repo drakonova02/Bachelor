@@ -288,10 +288,10 @@ void priorityQeueue::settleRoot(int root_index, int last_index) {
 	while (2 * unsettled <= last_index)	        // A current unsettled root is not a leaf.
 	{
 		if (2 * unsettled < last_index &&    // The unsettled root has both children.
-			array[2 * unsettled + 1] > array[2 * unsettled])
+			array[2 * unsettled + 1].data_priority > array[2 * unsettled].data_priority)
 			child = 2 * unsettled + 1;	// The right child has a larger key.
 		else	child = 2 * unsettled;		// The left child has a larger key.
-		if (array[unsettled] < array[child])
+		if (array[unsettled].data_priority < array[child].data_priority)
 		{
 			swap(unsettled, child);
 			unsettled = child;
