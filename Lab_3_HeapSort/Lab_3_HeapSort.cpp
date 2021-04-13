@@ -194,17 +194,27 @@ struct Node{
 	int data_priority;
 	int data_value;
 	Node(int data, int priority);
+	Node() { data_priority = 0; data_value = 0;};
 };
 
 class priorityQeueue:public List {
 public:
-	priorityQeueue(int n = 10) :List(n) {};
-	void enqueue(); 
-	void dequeueMax();
+	priorityQeueue(int n = 10);
+	void enqueue(int item, int priority); 
+	//void dequeueMax();
 
 protected:
-
+	Node* array;
+	void swap(int index1, int index2);
 };
+
+//constructor priorityQeueue
+
+priorityQeueue::priorityQeueue(int n) {
+	max = n + 1; //max number of element + arr[0] isn`t used
+	last = 0;
+	array = new Node[max]; // create dynamic array
+}
 
 //constructor Node
 Node::Node(int data, int priority) {
@@ -212,17 +222,40 @@ Node::Node(int data, int priority) {
 	data_priority = priority;
 }
 
+void priorityQeueue::swap(int index1, int index2) {
+	Node temp = array[index1];
+	array[index1] = array[index2];
+	array[index2] = temp;
+}
+
+void priorityQeueue::enqueue(int item, int priority){
+	if (isFull()) {
+		cout << "Qeueue is overflow.\n";
+		return;
+	}
+	else {
+		int i = ++last;
+		array[i] = Node(item, priority);
+		while (i / 2 >= 1 && array[i / 2].data_priority < array[i].data_priority)  // i/2 gives an integer quotient.
+		{
+			swap(i, i / 2);
+			i = i / 2;
+		}//while
+	}//else
+	for (int i = 0; i <= last; ++i) cout << array[i].data_value << " ";
+	cout << endl;
+}//P_H_Insert
+
+
 void main()
 {
-	priorityQeueue A;
-	A.addItem(40);
-	A.addItem(30);
-	A.addItem(50);
-	A.addItem(80);
-	A.addItem(70);
-	A.addItem(90);
-	A.addItem(20);
-	A.print();
-	A.HeapSort();
+	priorityQeueue A(10);
+	A.enqueue(40, 1);
+	A.enqueue(30, 4);
+	A.enqueue(50, 5);
+	A.enqueue(80, 6);
+	A.enqueue(70, 2);
+	A.enqueue(90, 3);
+	A.enqueue(20, 7);
 	A.print();
 }
