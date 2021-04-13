@@ -189,6 +189,10 @@ void List::printHeap(int index, int last_index, int level) {
 	if (2*index + 1 <= last) printHeap(2 * index + 1, index, level);
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//**********************************************************************************************************//
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 //Additional task #7
 struct Node{
 	int data_priority;
@@ -202,6 +206,8 @@ public:
 	priorityQeueue(int n = 10);
 	void enqueue(int item, int priority); 
 	//void dequeueMax();
+	void print();
+	void printHeap(int index = 1, int last_index = -1, int level = 0);
 
 protected:
 	Node* array;
@@ -242,10 +248,31 @@ void priorityQeueue::enqueue(int item, int priority){
 			i = i / 2;
 		}//while
 	}//else
-	for (int i = 0; i <= last; ++i) cout << array[i].data_value << " ";
-	cout << endl;
-}//P_H_Insert
+}
 
+void priorityQeueue::print() {
+	if (isEmpty()) {
+		cout << "List is Empty.\n";
+		return;
+	}
+	for (int i = 1; i <= last; ++i) cout << array[i].data_value<< " ";
+	cout << endl;
+}
+
+void priorityQeueue::printHeap(int index, int last_index, int level) {
+	int z = 0;
+	if (last_index != -1) z = array[last_index].data_value;
+	while (z != 0) {
+		++level;
+		z /= 10;
+	}
+	for (int i = 0; i < level; ++i) cout << " ";
+	cout << array[index].data_value << " " << endl;
+	++level;
+	if (2 * index <= last) printHeap(2 * index, index, level);
+	else cout << endl;
+	if (2 * index + 1 <= last) printHeap(2 * index + 1, index, level);
+}
 
 void main()
 {
@@ -258,4 +285,5 @@ void main()
 	A.enqueue(90, 3);
 	A.enqueue(20, 7);
 	A.print();
+	A.printHeap();
 }
