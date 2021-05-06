@@ -43,6 +43,7 @@ private:
 
 	p_edge* adjacencyList; //pointer to array of pointers to adjacency lists
 	void Insert(int, int, int);
+	bool Search(int, int);
 	void Print_list(int);
 };
 
@@ -70,9 +71,9 @@ Graph::Graph(){
 			else if (answer >= 1 && answer <= n){
 				cout << "Enter integer weight of edge " << i << "--" << answer << " ==> ";
 				cin >> edge_weight;
-				/*if(check node) contiue*/
-				//insert new node in linked list of i
-				//insert new node in linked list of answer
+				if (Search(i, answer)) continue;
+				Insert(i, answer, edge_weight);
+				Insert(answer, i, edge_weight);
 				edge_count++;
 			}
 			else cout << "VERTEX NUMBER IS OUT OF RANGE!!\n";
@@ -99,6 +100,13 @@ void Graph::Insert(int father_ver, int son_ver, int w){
 
 	new_pointer->next = adjacencyList[father_ver];
 	adjacencyList[father_ver] = new_pointer;
+}
+
+bool Graph::Search(int father_ver, int son_ver) {
+
+	for (p_edge current = adjacencyList[father_ver]; current != NULL; current->next)
+		if (current->vertex2 == son_ver) return true;
+	return false;
 }
 
 int main()
