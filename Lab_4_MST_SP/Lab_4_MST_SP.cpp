@@ -38,6 +38,7 @@ public:
 	int Vertices_number() { return n; };
 	int Edges_number() { return m; };
 	void Print_graph();
+	void Prim(int);
 
 private:
 
@@ -148,6 +149,82 @@ void Graph::Print_graph() {
 					for (p_edge current = adjacencyList[i]; current != NULL; current = current->next)
 						if (current->vertex2 == j) cout << current->weight << "\t";
 				}
+			}
+		}
+		cout << "\n\n";
+	}
+}
+
+//Additional metod #7
+
+void Graph::Prim(int start_vertex){
+
+	int father, son, weight;
+	p_edge current = adjacencyList[start_vertex], fringe_pointer = NULL; // pointer to a linked list of fringe edges
+	
+	p_int* MST = new p_int[n]; //MST array
+	for (int i = 0; i < n; ++i) {
+		MST[i] = new int[n];
+		for (int j = 0; j < n; ++j) MST[i][j] = 0;
+	}
+
+	//array to register status of vertices: 'u'-unseen, 'f'-fringe, 't'- in MST
+	char* marks_status = new char[n + 1];
+	for (int i = 1; i <= n; i++) marks_status[i] = 'u';
+
+	// PROCESSING START VERTEX
+	marks_status[start_vertex] = 't'; //include start_vertex into MST
+	
+	while (current != NULL){ //creating fringe for start_vertex
+		father = current->vertex1;
+		son = current->vertex2;
+		weight = current->weight;
+
+		if (father != son) {
+			//insert fringe edge
+			marks_status[son] = 'f';
+		}
+
+		current = current->next;
+	}
+
+	// PROCESSING OTHER VERTICES
+	while (fringe_pointer != NULL){
+
+		p_edge new_MST_edge = fringe_pointer; //pointer to 1st fringe edge
+		fringe_pointer = fringe_pointer->next; //excluding min edge from fringe
+		// including min weight edge into linked list of MST edges at the beginning
+		MST[new_MST_edge->vertex1][new_MST_edge->vertex2] = new_MST_edge->weight;
+
+		marks_status[new_MST_edge->vertex2] = 't';
+		//updating the fringe for new vertex included in MST
+		current = adjacencyList[new_MST_edge->vertex2];
+		while (current != NULL)
+		{
+			if (marks_status[current->vertex2] != 't')
+			{
+				father = current->vertex1;
+				son = current->vertex2;
+				weight = current->weight;
+				//updating fringe linked list, excluding duplicate edges
+				if (father != son) {
+					//insert fringe edge
+					marks_status[son] = 'f';
+				}
+			}
+			current = current->next;
+		}
+	}
+	delete[] marks_status;
+
+	// PRINTING MST
+	cout << " \nLIST of EDGES in Prim's MST: \n";
+	for (int i = 0; i < n + 1; ++i) {
+		for (int j = 0; j < n + 1; ++j) {
+			if ((i == 0 || j == 0)) cout << "V" << max(i,j) << "\t";
+			else {
+				if (MST[i][j] != 0) cout << MST[i][j] << "\t";
+				else cout << 0 << "\t";
 			}
 		}
 		cout << "\n\n";
