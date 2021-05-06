@@ -1,0 +1,2 @@
+C:\Users\Алеся\OneDrive\Документы\GitHub\Bachelor\Lab_4_MST_SP\Debug\Lab_4_MST_SP.exe
+C:\Users\Алеся\OneDrive\Документы\GitHub\Bachelor\Lab_4_MST_SP\Debug\Lab_4_MST_SP.pdb
