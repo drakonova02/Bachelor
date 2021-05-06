@@ -109,6 +109,20 @@ bool Graph::Search(int father_ver, int son_ver) {
 	return false;
 }
 
+void Graph::Print_list(int father_ver) {
+	
+	p_edge current = adjacencyList[father_ver];
+
+	while (current != NULL){
+		cout << '(' << father_ver << "--" << current->vertex2 << '|' << current->weight << ')' << ", ";
+		current = current->next;
+	}
+	
+	cout << endl;
+}
+
+
+
 int main()
 {
     
