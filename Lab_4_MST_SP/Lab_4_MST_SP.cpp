@@ -90,7 +90,18 @@ Graph::Graph(){
 
 //Destructor
 
+Graph::~Graph(){
 
+	for (int i = 1; i <= n; i++){
+		p_edge temp;
+
+		while (adjacencyList[i] != NULL){
+			temp = adjacencyList[i];
+			adjacencyList[i] = adjacencyList[i]->next;
+			delete temp;
+		}
+	}
+}
 
 // Metods of class
 
