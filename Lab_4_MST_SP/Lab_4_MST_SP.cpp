@@ -49,6 +49,7 @@ private:
 	void Insert(int, int, int);
 	bool Search(int, int);
 	void Print_list(int);
+	void Insert_fringe_sort(p_edge&, int, int, int);
 };
 
 //Constructor
@@ -159,13 +160,13 @@ void Graph::Print_graph() {
 
 void Graph::Prim(int start_vertex){
 
-	int father, son, weight;
+	int father, son, w;
 	p_edge current = adjacencyList[start_vertex], fringe_pointer = NULL; // pointer to a linked list of fringe edges
 	
-	p_int* MST = new p_int[n]; //MST array
-	for (int i = 0; i < n; ++i) {
-		MST[i] = new int[n];
-		for (int j = 0; j < n; ++j) MST[i][j] = 0;
+	p_int* MST = new p_int[n+1]; //MST array
+	for (int i = 0; i <= n; ++i) {
+		MST[i] = new int[n+1];
+		for (int j = 0; j <= n; ++j) MST[i][j] = 0;
 	}
 
 	//array to register status of vertices: 'u'-unseen, 'f'-fringe, 't'- in MST
@@ -178,10 +179,10 @@ void Graph::Prim(int start_vertex){
 	while (current != NULL){ //creating fringe for start_vertex
 		father = current->vertex1;
 		son = current->vertex2;
-		weight = current->weight;
+		w = current->weight;
 
 		if (father != son) {
-			//insert fringe edge
+			Insert_fringe_sort(fringe_pointer, father, son, w);
 			marks_status[son] = 'f';
 		}
 
@@ -195,6 +196,7 @@ void Graph::Prim(int start_vertex){
 		fringe_pointer = fringe_pointer->next; //excluding min edge from fringe
 		// including min weight edge into linked list of MST edges at the beginning
 		MST[new_MST_edge->vertex1][new_MST_edge->vertex2] = new_MST_edge->weight;
+		MST[new_MST_edge->vertex2][new_MST_edge->vertex1] = new_MST_edge->weight;
 
 		marks_status[new_MST_edge->vertex2] = 't';
 		//updating the fringe for new vertex included in MST
@@ -205,10 +207,10 @@ void Graph::Prim(int start_vertex){
 			{
 				father = current->vertex1;
 				son = current->vertex2;
-				weight = current->weight;
+				w = current->weight;
 				//updating fringe linked list, excluding duplicate edges
 				if (father != son) {
-					//insert fringe edge
+					Insert_fringe_sort(fringe_pointer, father, son, w);
 					marks_status[son] = 'f';
 				}
 			}
@@ -218,7 +220,7 @@ void Graph::Prim(int start_vertex){
 	delete[] marks_status;
 
 	// PRINTING MST
-	cout << " \nLIST of EDGES in Prim's MST: \n";
+	cout << " \nLIST of EDGES in Prim's MST: \n\n";
 	for (int i = 0; i < n + 1; ++i) {
 		for (int j = 0; j < n + 1; ++j) {
 			if ((i == 0 || j == 0)) cout << "V" << max(i,j) << "\t";
@@ -231,8 +233,62 @@ void Graph::Prim(int start_vertex){
 	}
 }
 
+//List is a reference to a pointer to a linked fringe list of candidate edges.
+//List nodes are sorted by weights of edges.
+
+void Graph::Insert_fringe_sort(p_edge& List, int father_ver, int son_ver, int w){
+	
+	p_edge ptr, //pointer to new edge
+	previous = NULL, current = List; 
+	int insert_search = 0; //mode of inserting a new node into the list
+	
+// Possible values of insert_search:
+//0 - do nothing;
+//1 - insert a new edge into a fringe linked list;
+// 2 - insert a new edge into a list + search & delete a possible second candidate edge.
+
+	//The position is found to insert a new edge into the fringe linked list.
+	while (current != NULL && current->weight < w && current->vertex2 != son_ver)
+	{
+		previous = current;
+		current = current->next;
+	}
+
+	if (current == NULL) insert_search = 1; //Add the edge without search for a duplicate edge.
+	else if (current->weight >= w) insert_search = 2; //Add the edge and search for a duplicate edge.
+
+	if (insert_search != 0){
+
+		ptr = new edge(father_ver, son_ver, w);
+
+		if (previous == NULL){ //The new list node is added at the beginning of the linked list.
+			ptr->next = List;
+			List = previous = ptr;
+		}
+		else{ 
+			ptr->next = current;
+			previous->next = ptr;
+			previous = ptr;
+		}
+
+		if (insert_search == 2){ //A possible duplicate candidate edge is searched for.
+			
+			while (current != NULL && current->vertex2 != son_ver){
+				previous = current;
+				current = current->next;
+			}
+
+			if (current != NULL){ //A duplicate candidate edge is deleted.
+				previous->next = current->next;
+				delete current;
+			}
+		}
+	}
+}
+
 int main()
 {
 	Graph MyGraph;
 	MyGraph.Print_graph();
+	MyGraph.Prim(1);
 }
