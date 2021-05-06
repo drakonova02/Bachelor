@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include <math.h>
 
 using namespace std;
 
@@ -25,6 +26,7 @@ struct edge{
 };
 
 typedef edge* p_edge;
+typedef int* p_int;
 
 //A Graph object is created via dialog with a user.
 //The object is represented by linked adjacency lists unsorted by numbers of vertices.
@@ -35,6 +37,7 @@ public:
 	~Graph();
 	int Vertices_number() { return n; };
 	int Edges_number() { return m; };
+	void Print_graph();
 
 private:
 
@@ -73,7 +76,7 @@ Graph::Graph(){
 				cin >> edge_weight;
 				if (Search(i, answer)) continue;
 				Insert(i, answer, edge_weight);
-				Insert(answer, i, edge_weight);
+				if(i != answer)Insert(answer, i, edge_weight);
 				edge_count++;
 			}
 			else cout << "VERTEX NUMBER IS OUT OF RANGE!!\n";
@@ -84,7 +87,7 @@ Graph::Graph(){
 	cout << "\nADJACENCY LISTS for each vertex of input graph:\n";
 	for (int i = 1; i <= n; ++i){
 		cout << "List for vertex #" << i << ": ";
-		//Print_list(i);
+		Print_list(i);
 	}
 }
 
@@ -115,7 +118,7 @@ void Graph::Insert(int father_ver, int son_ver, int w){
 
 bool Graph::Search(int father_ver, int son_ver) {
 
-	for (p_edge current = adjacencyList[father_ver]; current != NULL; current->next)
+	for (p_edge current = adjacencyList[father_ver]; current != NULL; current = current->next)
 		if (current->vertex2 == son_ver) return true;
 	return false;
 }
@@ -132,9 +135,27 @@ void Graph::Print_list(int father_ver) {
 	cout << endl;
 }
 
+void Graph::Print_graph() {
 
+	cout << "\nMatrix: \n\n";
+	for (int i = 0; i < n + 1; ++i) {
+		p_edge current = adjacencyList[i];
+		for (int j = 0; j < n + 1; ++j) {
+			if ((i == 0 || j == 0)) cout << "V" << max(i, j) << "\t";
+			else { 
+				if (!(Search(i, j))) cout << 0 << "\t";
+				else {
+					for (p_edge current = adjacencyList[i]; current != NULL; current = current->next)
+						if (current->vertex2 == j) cout << current->weight << "\t";
+				}
+			}
+		}
+		cout << "\n\n";
+	}
+}
 
 int main()
 {
-    
+	Graph MyGraph;
+	MyGraph.Print_graph();
 }
