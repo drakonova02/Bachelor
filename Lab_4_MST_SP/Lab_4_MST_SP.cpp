@@ -18,6 +18,21 @@ struct edge{
 	}
 };
 
+class Graph
+{
+public:
+	Graph();
+	~Graph();
+	int Nodes_number();
+	int Edges_number();
+
+private:
+	int n; // number of vertices
+	int m; // number of edges in graph or digraph
+	edge* adjacencyList; //pointer to array of pointers to adjacency lists
+	void Print_list(int);
+};
+
 int main()
 {
     
