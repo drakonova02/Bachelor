@@ -33,8 +33,8 @@ class Graph{
 public:
 	Graph();
 	~Graph();
-	int Nodes_number();
-	int Edges_number();
+	int Vertices_number() { return n; };
+	int Edges_number() { return m; };
 
 private:
 
