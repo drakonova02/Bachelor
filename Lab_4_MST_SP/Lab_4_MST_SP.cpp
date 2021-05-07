@@ -51,7 +51,7 @@ private:
 	bool Search(int, int);
 	void Print_list(int);
 	void Insert_fringe_sort(p_edge&, int, int, int);
-	void Heapsort(p_edge L[]);
+	void Heapsort(p_edge L[], int);
 	void SettleRoot(p_edge L[], int, int);
 	void Swap(int item1, int item2, p_edge L[]);
 };
@@ -162,41 +162,62 @@ void Graph::Print_graph() {
 
 void Graph::Kruskal(){ //It finds MST in a weighted, undirected, connected graph with no loops and multiple edges.
 
-	p_edge* edge_list = new p_edge[m + 1]; //array for graph edges
-	p_edge MST_edges = new edge[n]; //array for MST edges
-	p_int component = new int[n + 1]; //array to register connected components of vertices
 	p_edge current;
-
+	int MST_count = 1, count = 0;
+	p_edge* edge_list = new p_edge[m + 1]; //array for graph edges
+	p_edge* MST_edges = new p_edge[n]; //array for MST edges
+	p_int component = new int[n + 1]; //array to register connected components of vertices
 	for (int i = 1; i <= n; ++i) component[i] = i; //Initially each vertex is treated as a separate component #i.
 
-	// A list of graph edges is created from sorted adjacency lists.
-
-	int count = 0;
 	for (int i = 1; i <= n; ++i){
 		current = adjacencyList[i];
 		while (current != NULL){
-			if (current->vertex2 > i ) edge_list[++count] = current;
+			if (current->vertex2 > i) edge_list[++count] = current;
 			current = current->next;
 		}
 	}
 
-	Heapsort(edge_list);
+	Heapsort(edge_list, count);
 
+	// SELECTING AND INCLUDING EDGES INTO MST
+	for (int i = 1; i <= count && MST_count < n; ++i){
 
+		int a = edge_list[i]->vertex1;
+		int b = edge_list[i]->vertex2;
+
+		if (component[a] != component[b]){ //both vertices belong to different connected components
+
+			MST_edges[MST_count] = edge_list[i];
+			MST_count++;
+			//updating the list of connected components
+			int keep = component[b];
+			for (int j = 1; j <= n; ++j) if (component[j] == keep) component[j] = component[a];
+		}
+	}
+
+	delete[]component;
+	delete[]edge_list;
+
+	// PRINTING MST
+	cout << " \nLIST of EDGES in MST_Kruskal: \n";
+	for (int i = 1; i < n; ++i)
+		cout << MST_edges[i]->vertex1 << ',' << MST_edges[i]->vertex2 << " edge weight: " << MST_edges[i]->weight << endl;
+	
+	delete[]MST_edges;
 }
 
-void Graph::Heapsort(p_edge L[]){
+void Graph::Heapsort(p_edge L[], int n){
+	for (int i = n / 2; i >= 1; --i) 
+		SettleRoot(L, i, n);
 
-	for (int i = m / 2; i >= 1; --i) SettleRoot(L, i, n);
-
-	for (int end = n - 1; end >= 1; end--){	
+	for (int end = n - 1; end >= 1; --end){	
 		Swap(1, end + 1, L);
 		SettleRoot(L, 1, end);
 	}
 }
 
-void Graph::SettleRoot(p_edge L[], int root, int last)
-{
+void Graph::SettleRoot(p_edge L[], int root, int last){
+
 	int child, unsettled = root;
 	while (2 * unsettled <= last){
 
@@ -352,5 +373,5 @@ int main()
 {
 	Graph MyGraph;
 	MyGraph.Print_graph();
-	MyGraph.Prim(1);
+	MyGraph.Kruskal();
 }
