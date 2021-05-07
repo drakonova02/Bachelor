@@ -56,8 +56,7 @@ private:
 	void Heapsort(p_edge L[], int);
 	void SettleRoot(p_edge L[], int, int);
 	void Swap(int item1, int item2, p_edge L[]);
-	void Dijkstra_to(int, int);
-	void FindTreePath(p_edge&, p_edge&, int, int)
+	void FindTreePath(p_edge&, p_edge&, int, int);
 };
 
 //Constructor
@@ -243,11 +242,8 @@ void Graph::Swap(int item1, int item2, p_edge L[]) {
 	L[item2] = temp;
 }
 
-void Graph::Dijkstra(int start_ver) {
-	for (int i = 1; i <= m; ++i) if (i != start_ver) Dijkstra_to(start_ver, i);
-}
 
-void Graph::Dijkstra_to(int start_ver, int finish_ver){ //It finds the Shortest Path from start_vertex to end_vertex
+void Graph::Dijkstra(int start_ver){ //It finds the Shortest Path from start_vertex to end_vertex
 
 	int father_ver, son_ver, w;
 	p_edge fringe_pointer = NULL, tree_pointer = NULL, SP_pointer = NULL; // pointer to a linked list of SP edges
@@ -268,8 +264,10 @@ void Graph::Dijkstra_to(int start_ver, int finish_ver){ //It finds the Shortest 
 		father_ver = current->vertex1;
 		son_ver = current->vertex2;
 		w = (current->weight) + distance[start_ver]; //length of path
-		Insert_fringe_sort(fringe_pointer, father_ver, son_ver, w);
-		marks_status[son_ver] = 'f';
+		if (father_ver != son_ver) {
+			Insert_fringe_sort(fringe_pointer, father_ver, son_ver, w);
+			marks_status[son_ver] = 'f';
+		}
 		current = current->next;
 	}
 
@@ -295,8 +293,10 @@ void Graph::Dijkstra_to(int start_ver, int finish_ver){ //It finds the Shortest 
 				son_ver = current->vertex2;
 				w = (current->weight) + distance[new_SPT_edge->vertex2];
 				//updating fringe linked list + excluding duplicate edges
-				Insert_fringe_sort(fringe_pointer, father_ver, son_ver, w);
-				marks_status[son_ver] = 'f';
+				if (father_ver != son_ver) {
+					Insert_fringe_sort(fringe_pointer, father_ver, son_ver, w);
+					marks_status[son_ver] = 'f';
+				}
 			}
 			current = current->next;
 		}
@@ -311,21 +311,33 @@ void Graph::Dijkstra_to(int start_ver, int finish_ver){ //It finds the Shortest 
 		temp = temp->next;
 	}
 
-	// EXTRACTING SPECIFIC SHORTEST PATH FROM SP_TREE
-	//find tree
+	for (int i = 1; i <= n; ++i) {
+		
+		if (i == start_ver) continue;
+		p_edge previos = NULL;
+		current = tree_pointer;
+		while (current != NULL) { 
+			previos = current;
+			current = current->next; 
+		}
+		previos->next = SP_pointer;
+		SP_pointer = NULL;
+		
+		FindTreePath(SP_pointer, tree_pointer, start_ver, i);
 
-	// PRINTING SHORTEST PATH
-	cout << " \nEDGES in SHORTEST PATH from vertex "
-		<< start_ver << " to vertex " << finish_ver << endl;
+		// PRINTING SHORTEST PATH
+		cout << " \nEDGES in SHORTEST PATH from vertex "
+			<< start_ver << " to vertex " << i << endl;
 
-	temp = SP_pointer;
-	while (temp != NULL)
-	{
-		cout << '(' << temp->vertex1 << ',' << temp->vertex2
-			<< ") distance from start vertex to vertex "
-			<< temp->vertex2 << ": " << temp->weight << endl;
+		temp = SP_pointer;
+		while (temp != NULL)
+		{
+			cout << '(' << temp->vertex1 << ',' << temp->vertex2
+				<< ") distance from start vertex to vertex "
+				<< temp->vertex2 << ": " << temp->weight << endl;
 
-		temp = temp->next;
+			temp = temp->next;
+		}
 	}
 
 	// RELEASING DYNAMIC MEMORY
@@ -343,8 +355,32 @@ void Graph::Dijkstra_to(int start_ver, int finish_ver){ //It finds the Shortest 
 		SP_pointer = SP_pointer->next;
 		delete temp;
 	}
-}//SP_Dijkstra
+}
 
+//It finds a path in a tree in the direction from a leaf(endVertex) to its root(startVertex).
+//The path edges are excluded from the tree and linked into a separate list.
+
+void Graph::FindTreePath(p_edge& pathPointer, p_edge& treePointer, int start, int end) {
+	
+	p_edge current, previous;
+	for (int i = end; i != start; i = current->vertex1){
+
+		current = treePointer;
+		previous = NULL;
+		while (current != NULL && current->vertex2 != i){
+
+			previous = current;
+			current = current->next;
+		}
+
+		//The found (current) edge is excluded from the tree.
+		if (previous == NULL) treePointer = current->next;
+		else previous->next = current->next;
+		//The found (current) edge is inserted at the beginning of the path list.
+		current->next = pathPointer;
+		pathPointer = current;
+	}
+}
 
 //Additional metod #7
 
@@ -480,5 +516,5 @@ int main()
 {
 	Graph MyGraph;
 	MyGraph.Print_graph();
-	MyGraph.Kruskal();
+	MyGraph.Dijkstra(1);
 }
