@@ -33,6 +33,7 @@ typedef int* p_int;
 class Graph{
 
 public:
+
 	Graph();
 	~Graph();
 	int Vertices_number() { return n; };
@@ -40,6 +41,7 @@ public:
 	void Print_graph();
 	void Prim(int);
 	void Kruskal();
+	void Dijkstra(int);
 
 private:
 
@@ -54,6 +56,8 @@ private:
 	void Heapsort(p_edge L[], int);
 	void SettleRoot(p_edge L[], int, int);
 	void Swap(int item1, int item2, p_edge L[]);
+	void Dijkstra_to(int, int);
+	void FindTreePath(p_edge&, p_edge&, int, int)
 };
 
 //Constructor
@@ -238,6 +242,109 @@ void Graph::Swap(int item1, int item2, p_edge L[]) {
 	L[item1] = L[item2];
 	L[item2] = temp;
 }
+
+void Graph::Dijkstra(int start_ver) {
+	for (int i = 1; i <= m; ++i) if (i != start_ver) Dijkstra_to(start_ver, i);
+}
+
+void Graph::Dijkstra_to(int start_ver, int finish_ver){ //It finds the Shortest Path from start_vertex to end_vertex
+
+	int father_ver, son_ver, w;
+	p_edge fringe_pointer = NULL, tree_pointer = NULL, SP_pointer = NULL; // pointer to a linked list of SP edges
+	
+	//array to register the status of vertices: 'u'-unseen, 'f'-fringe, 't'- in SP_Tree
+	char* marks_status = new char[n + 1];
+	for (int i = 1; i <= n; i++) marks_status[i] = 'u';
+
+	//array to register the distances from start_vertex to a vertex #i.
+	p_int distance = new int[n + 1];
+	for (int i = 1; i <= n; i++) distance[i] = 0;
+
+	// PROCESSING START VERTEX
+	p_edge current = adjacencyList[start_ver];
+	marks_status[start_ver] = 't';
+
+	while (current != NULL){ //creating initial fringe for start_vertex
+		father_ver = current->vertex1;
+		son_ver = current->vertex2;
+		w = (current->weight) + distance[start_ver]; //length of path
+		Insert_fringe_sort(fringe_pointer, father_ver, son_ver, w);
+		marks_status[son_ver] = 'f';
+		current = current->next;
+	}
+
+	// PROCESSING OTHER VERTICES
+	while (fringe_pointer != NULL){
+
+		p_edge new_SPT_edge = fringe_pointer; //pointer to 1st fringe edge
+		//excluding the shortest edge from the fringe list
+		fringe_pointer = fringe_pointer->next;
+
+		//including the shortest edge at the beginning of the list of SP_Tree edges
+		new_SPT_edge->next = tree_pointer;
+		tree_pointer = new_SPT_edge;
+		marks_status[new_SPT_edge->vertex2] = 't';
+		distance[new_SPT_edge->vertex2] = new_SPT_edge->weight;
+		//updating fringe for new vertex included into SP_Tree
+		p_edge current = adjacencyList[new_SPT_edge->vertex2];
+		while (current != NULL){
+
+			if (marks_status[current->vertex2] != 't'){
+
+				father_ver = current->vertex1;
+				son_ver = current->vertex2;
+				w = (current->weight) + distance[new_SPT_edge->vertex2];
+				//updating fringe linked list + excluding duplicate edges
+				Insert_fringe_sort(fringe_pointer, father_ver, son_ver, w);
+				marks_status[son_ver] = 'f';
+			}
+			current = current->next;
+		}
+	}
+
+	// PRINTING SP_TREE
+	cout << " \nLIST of EDGES in SP Tree: \n";
+	p_edge temp = tree_pointer;
+	while (temp != NULL){
+		cout << '(' << temp->vertex1 << ',' << temp->vertex2 << ") distance from start vertex to vertex "
+			<< temp->vertex2 << ": " << temp->weight << endl;
+		temp = temp->next;
+	}
+
+	// EXTRACTING SPECIFIC SHORTEST PATH FROM SP_TREE
+	//find tree
+
+	// PRINTING SHORTEST PATH
+	cout << " \nEDGES in SHORTEST PATH from vertex "
+		<< start_ver << " to vertex " << finish_ver << endl;
+
+	temp = SP_pointer;
+	while (temp != NULL)
+	{
+		cout << '(' << temp->vertex1 << ',' << temp->vertex2
+			<< ") distance from start vertex to vertex "
+			<< temp->vertex2 << ": " << temp->weight << endl;
+
+		temp = temp->next;
+	}
+
+	// RELEASING DYNAMIC MEMORY
+	delete[]marks_status;
+	delete[]distance;
+	while (tree_pointer != NULL)
+	{
+		temp = tree_pointer;
+		tree_pointer = tree_pointer->next;
+		delete temp;
+	}
+	while (SP_pointer != NULL)
+	{
+		temp = SP_pointer;
+		SP_pointer = SP_pointer->next;
+		delete temp;
+	}
+}//SP_Dijkstra
+
 
 //Additional metod #7
 
