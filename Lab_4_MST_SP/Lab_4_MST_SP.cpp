@@ -51,9 +51,9 @@ private:
 	bool Search(int, int);
 	void Print_list(int);
 	void Insert_fringe_sort(p_edge&, int, int, int);
-	void Heapsort(edge L[]);
-	void SettleRoot(edge L[], int, int);
-	Swap(int item1, int item2, edge L[])
+	void Heapsort(p_edge L[]);
+	void SettleRoot(p_edge L[], int, int);
+	void Swap(int item1, int item2, p_edge L[]);
 };
 
 //Constructor
@@ -162,8 +162,7 @@ void Graph::Print_graph() {
 
 void Graph::Kruskal(){ //It finds MST in a weighted, undirected, connected graph with no loops and multiple edges.
 
-	// CREATING AND INITIALIZING VARIABLES AND DATA STRUCTURES
-	p_edge edge_list = new edge[m + 1]; //array for graph edges
+	p_edge* edge_list = new p_edge[m + 1]; //array for graph edges
 	p_edge MST_edges = new edge[n]; //array for MST edges
 	p_int component = new int[n + 1]; //array to register connected components of vertices
 	p_edge current;
@@ -172,26 +171,49 @@ void Graph::Kruskal(){ //It finds MST in a weighted, undirected, connected graph
 
 	// A list of graph edges is created from sorted adjacency lists.
 
+	int count = 0;
+	for (int i = 1; i <= n; ++i){
+		current = adjacencyList[i];
+		while (current != NULL){
+			if (current->vertex2 > i ) edge_list[++count] = current;
+			current = current->next;
+		}
+	}
+
+	Heapsort(edge_list);
+
+
 }
 
-void Graph::Heapsort(edge L[]){
+void Graph::Heapsort(p_edge L[]){
 
 	for (int i = m / 2; i >= 1; --i) SettleRoot(L, i, n);
 
-	for (int end = n - 1; end >= 1; end--)	// actual sorting loop
-	{
-		edge temp = L[1];
-		L[1] = L[end + 1];
-		L[end + 1] = temp;
+	for (int end = n - 1; end >= 1; end--){	
+		Swap(1, end + 1, L);
 		SettleRoot(L, 1, end);
 	}
 }
 
+void Graph::SettleRoot(p_edge L[], int root, int last)
+{
+	int child, unsettled = root;
+	while (2 * unsettled <= last){
 
+		if (2 * unsettled < last && L[2 * unsettled + 1]->weight > L[2 * unsettled]->weight)
+			child = 2 * unsettled + 1;	
+		else child = 2 * unsettled;		
 
+		if (L[unsettled]->weight < L[child]->weight){
+			Swap(unsettled, child, L);
+			unsettled = child;
+		}
+		else break;
+	}
+}
 
-void Graph::Swap(int item1, int item2, edge L[]) {
-	edge temp = L[item1];
+void Graph::Swap(int item1, int item2, p_edge L[]) {
+	p_edge temp = L[item1];
 	L[item1] = L[item2];
 	L[item2] = temp;
 }
