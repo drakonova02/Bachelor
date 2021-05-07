@@ -39,6 +39,7 @@ public:
 	int Edges_number() { return m; };
 	void Print_graph();
 	void Prim(int);
+	void Kruskal();
 
 private:
 
@@ -50,6 +51,9 @@ private:
 	bool Search(int, int);
 	void Print_list(int);
 	void Insert_fringe_sort(p_edge&, int, int, int);
+	void Heapsort(edge L[]);
+	void SettleRoot(edge L[], int, int);
+	Swap(int item1, int item2, edge L[])
 };
 
 //Constructor
@@ -154,6 +158,42 @@ void Graph::Print_graph() {
 		}
 		cout << "\n\n";
 	}
+}
+
+void Graph::Kruskal(){ //It finds MST in a weighted, undirected, connected graph with no loops and multiple edges.
+
+	// CREATING AND INITIALIZING VARIABLES AND DATA STRUCTURES
+	p_edge edge_list = new edge[m + 1]; //array for graph edges
+	p_edge MST_edges = new edge[n]; //array for MST edges
+	p_int component = new int[n + 1]; //array to register connected components of vertices
+	p_edge current;
+
+	for (int i = 1; i <= n; ++i) component[i] = i; //Initially each vertex is treated as a separate component #i.
+
+	// A list of graph edges is created from sorted adjacency lists.
+
+}
+
+void Graph::Heapsort(edge L[]){
+
+	for (int i = m / 2; i >= 1; --i) SettleRoot(L, i, n);
+
+	for (int end = n - 1; end >= 1; end--)	// actual sorting loop
+	{
+		edge temp = L[1];
+		L[1] = L[end + 1];
+		L[end + 1] = temp;
+		SettleRoot(L, 1, end);
+	}
+}
+
+
+
+
+void Graph::Swap(int item1, int item2, edge L[]) {
+	edge temp = L[item1];
+	L[item1] = L[item2];
+	L[item2] = temp;
 }
 
 //Additional metod #7
