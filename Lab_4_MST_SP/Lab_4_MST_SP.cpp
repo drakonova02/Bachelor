@@ -516,5 +516,7 @@ int main()
 {
 	Graph MyGraph;
 	MyGraph.Print_graph();
+	MyGraph.Kruskal();
 	MyGraph.Dijkstra(1);
+	MyGraph.Prim(1);
 }
