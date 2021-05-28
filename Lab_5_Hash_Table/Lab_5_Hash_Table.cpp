@@ -15,7 +15,7 @@ class HashTable {
 public:
     HashTable(int);
     ~HashTable();
-    int Collision() { return collis; };
+    void Collision() { cout << "\n\n Number of collision: " << collis << "\n\n"; };
     void printTable();
 
 private:
@@ -99,10 +99,10 @@ void HashTable::printTable() {
 int main()
 {
     HashTable a(60);
-    cout << a.Collision() << endl;
+    a.Collision();
     a.printTable();
 
     HashTable b(90);
-    cout << b.Collision() << endl;
+    b.Collision();
     b.printTable();
 }
