@@ -36,6 +36,26 @@ HashTable::HashTable(int tableSize) {
 
 }//constructor
 
+HashTable::~HashTable() {
+
+    for (int i = 0; i < primeTableSize; i++) {
+
+        NodePtr current, temp;
+
+        if (table[i] != NULL) {
+
+            current = table[i];
+
+            while (current != NULL) {
+                temp = current;
+                current = current->next;
+
+                delete temp;
+            }
+        }
+    }
+}//destructor
+
 
 int main()
 {
