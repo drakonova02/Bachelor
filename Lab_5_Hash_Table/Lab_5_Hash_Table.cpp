@@ -10,6 +10,18 @@ struct NodeType {
 
 typedef NodeType* NodePtr;
 
+class HashTable {
+
+public:
+    HashTable(int);
+    ~HashTable();
+
+private:
+    int primeTableSize;
+    NodePtr* table; //pointer to a dynamic array of pointers
+
+}; //HashTable
+
 
 int main()
 {
