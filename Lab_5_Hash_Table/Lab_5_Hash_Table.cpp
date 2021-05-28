@@ -69,6 +69,7 @@ void HashTable::AddKeys() {
         NodePtr a = new NodeType;
         a->key = k;
         a->next = table[index];
+        if (table[index] != NULL) ++collis;
         table[index] = a;
     }
 }//insert
