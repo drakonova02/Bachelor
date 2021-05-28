@@ -16,6 +16,7 @@ public:
     HashTable(int);
     ~HashTable();
     int Collision() { return collis; };
+    void printTable();
 
 private:
     int primeTableSize;
@@ -74,8 +75,34 @@ void HashTable::AddKeys() {
     }
 }//insert
 
+void HashTable::printTable() {
+
+    cout << "\nContents of hash table of size " << primeTableSize - 1 << ":\n";
+
+    for (int i = 0; i < primeTableSize; ++i) {
+
+        if (table[i] == NULL) cout << "List is empty\n";
+        else {
+            NodePtr current = table[i];
+
+            while (current != NULL) {
+                cout << current->key << ", ";
+                current = current->next;
+            }//while
+
+            cout << endl;
+        }
+    }
+}//printTable
+
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    HashTable a(60);
+    cout << a.Collision() << endl;
+    a.printTable();
+
+    HashTable b(90);
+    cout << b.Collision() << endl;
+    b.printTable();
 }
