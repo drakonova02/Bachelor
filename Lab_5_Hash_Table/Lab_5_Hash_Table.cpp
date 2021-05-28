@@ -21,6 +21,8 @@ private:
     int primeTableSize;
     int collis;
     NodePtr* table; //pointer to a dynamic array of pointers
+
+    int h(int k) { return k % primeTableSize;};     //division hash function
     //void AddKeys();
 
 }; //HashTable
@@ -55,6 +57,7 @@ HashTable::~HashTable() {
         }
     }
 }//destructor
+
 
 
 int main()
