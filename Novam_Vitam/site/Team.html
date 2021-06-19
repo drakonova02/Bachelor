@@ -1,0 +1,405 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <title>Team - Novam Vitam</title>
+
+    <script language="JavaScript">
+      document.onselectstart=function(){return false}
+      document.oncontextmenu=function(){return false}
+  </script>
+
+    <style>
+      /* general */
+      *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;} 
+
+      .title{
+        font-family: "Open Sans", sans-serif;
+        font-size: 1.5vw;
+        color: black;
+        text-align: center;
+        font-weight: bold;
+        grid-row: 2;}
+
+      .title_lines{
+        overflow: hidden;}
+
+      .title_lines:before,
+      .title_lines:after {
+	      content: '';
+      	display: inline-block;
+      	vertical-align: middle;
+      	box-sizing: border-box;
+      	width: 13.5%;
+	      height: 1.5%;
+	      background: black;
+      	border: solid black;
+      	border-width: 0 0.5vw;}
+
+      .title_lines:before {
+	      margin-left: -100%;}
+
+      .title_lines:after {
+        margin-right: -100%;}
+      
+        body{
+        height: 186.5%;
+        display: inline-grid;
+        grid-template-rows: 36% 1.5% 12% 126% 18.25%;
+        row-gap: 2%;
+        grid-template-columns: 0% 85% 0%;
+        column-gap: 7.5%;
+        background-color: whitesmoke;}
+
+/* menu */
+      .site_nav{
+        width: 100%;
+        grid-column-start:1 ;
+        grid-column-end: 3;
+        height: 8vh;
+        background-color: black;
+        display: inline-grid;
+        grid-template-rows: 0% 50%;
+        grid-template-columns: 0% 20% 25% 5% 4% 7% 5%;
+        column-gap: 5%;
+        row-gap: 25%;
+        position: fixed;
+        margin-top: 2%;
+        z-index: 3;
+        background: rgba(0, 0, 0, 0.9);
+        align-items: center;
+        top: 0;
+        bottom: 0;}
+
+      .site_nav:hover{
+        border: 1px solid whitesmoke;  
+        }
+
+      .nav_name{
+        font-family: "Raleway", sans-serif; 
+        font-weight: 800;
+        font-size: 2.5vw;
+        color: whitesmoke;
+        text-decoration: none;
+        grid-row:2;
+        grid-column:2;}
+
+      .nav_link{
+        color:whitesmoke;
+        text-decoration: none;
+        font-size:1.35vw;
+        font-family: "Open Sans", sans-serif;
+        grid-row:2;}
+
+      .nav_link:hover{
+        color:#ff50b6;
+        /*text-decoration:underline;*/}
+
+
+/*flooter*/
+        .site_flooter{
+          width:100%;
+          height: 100%;
+          background-color: black;
+          display: inline-grid;
+          grid-template-rows: 0% 10% auto 14%;
+          row-gap: 10%;
+          grid-template-columns: 0% 20% 20% 20%;
+          column-gap: 5.5%;
+          background: rgba(0, 0, 0, 0.8);
+          grid-row: 5;
+          grid-column-start:1 ;
+          grid-column-end: 4;}
+
+        .flooter_block{
+          display: inline-grid;
+          grid-template-rows: 20% 70%;
+          row-gap: 7%;
+          height: 100%;
+          width:26vw;
+          grid-row:2/4;}
+
+        .flooter_block_text{
+          display: inline-grid;
+          grid-row:2;
+          grid-template-rows: auto;
+          gap:10%;
+          height: 100%;}
+
+        .flooter_gen_text{
+          grid-row:1;
+          font-family: "Raleway", sans-serif;
+          font-size: 1.3vw;
+          color: #ff50b6;
+          font-weight: 600;
+          font:bold;
+          text-decoration: underline}
+
+        .text_flooter{
+            font-family: "Noto Sans", sans-serif;
+            font-size: 1vw;
+            color: whitesmoke;
+            text-decoration: none;}
+        
+  /*Search*/
+        .search {
+	        width: 30vw;
+          height: 35%;
+	        position: relative;
+          grid-row:3;
+          grid-column: 4;}
+
+        .search_gen_text{
+          font-family: "Raleway", sans-serif;
+          font-size: 1.3vw;
+          color: #ff50b6;
+          font-weight: 600;
+          font:bold; 
+          text-decoration: underline;
+          grid-row:2;
+          grid-column: 4;}
+
+        input {
+	      border:rgba(0,0,0,0.5);}
+
+        .input {
+	        width: 100%;
+          height: 100%;
+	        padding: 2.5% 10% 2.5% 5%;
+	        box-shadow: inset 0 0 3% rgba(0, 0, 0, 0.9);
+          background: whitesmoke;
+	        font: 1.3vw "Noto Sans", sans-serif;
+	        color: #333;}
+
+        .input:focus {
+	        box-shadow: inset 0 0 5px rgba(0,0,0,0.2), inset 0 1px 2px rgba(0,0,0,0.4);
+	        background: whitesmoke;
+	        color: #333;}
+
+        .submit {
+	      position: absolute;
+	      top: 0;
+	      right: 0;
+        width: 12.5%;
+	      height: 100%;
+        cursor: pointer;
+	      background: url(https://lh4.googleusercontent.com/-b-5aBxcxarY/UAfFW9lVyjI/AAAAAAAABUg/gQtEXuPuIds/s13/go.png) 50% no-repeat;
+	      opacity: 0.9;}
+
+        .search .submit:hover {
+	        opacity: 1;}
+        
+        .text_bottom{
+          color:rgba(165, 162, 162, 0.6);
+          float:left;
+          grid-row:4;
+          font-size: 1vw;
+          height:100%;
+          grid-column: 2;}
+
+/*Header*/
+        .header_backg{
+            grid-row: 1;
+            background-image: url(https://images6.alphacoders.com/539/539561.png);
+            background-size: cover;
+              background-repeat: no-repeat; 
+              display: inline-grid;
+              grid-template-rows: 0% 20%;
+              row-gap: 45%;
+              grid-template-columns: 0% 15%;
+              column-gap: 42.5%;
+              align-items: center;
+              grid-column-start:1 ;
+              grid-column-end: 4;}
+
+        .header_text{
+            font-family: 'Playfair Display SC', serif;
+            grid-row: 2;
+            grid-column: 2;
+            font-size: 4.5vw;
+            color:white;
+            text-shadow: rgb(0, 0, 0) 1px 1px 2px;}
+
+/*Main bac*/
+           .titl{
+              grid-row:3;
+              grid-column: 2;
+              display: inline-grid;
+              grid-template-rows: 1.25% 15% 30% 1.5%;
+              row-gap: 17%;
+              align-items: center;}
+
+            hr{
+                background-color:rgb(0, 0, 0,0.8);
+                width: 100%;
+                height: 100%;
+                grid-column: 1;}
+
+            .main_text{
+                font-family: "Noto Sans", sans-serif;
+                font-size: 1.25vw;
+                color: rgb(0, 0, 0,0.8);
+                text-align: center;
+                padding-right: 1.5%;
+                padding-left: 1.5%;
+                grid-row: 3;
+                grid-column: 1;}
+
+                .breadcrumb{
+              grid-row: 2;
+              grid-column: 2;
+              width: 100%;
+              list-style: none;
+              font-family: "Open Sans", sans-serif;
+              font-size:1.35vw;}
+
+            ul.breadcrumb li+li:before {
+              padding: 8px;
+              color: black;
+              content: "/\00a0";}
+            
+            li{
+              display: inline;
+            }
+
+            li a{
+              color:black;
+              text-decoration: none;
+              font-size:1.35vw;
+              font-family: "Open Sans", sans-serif;}
+
+            li a:hover{
+              color: #ff50b6;
+              text-decoration: underline;
+            }
+
+    /*Team*/                
+            .team_gen_block{
+                grid-row: 4;
+                grid-column: 2;
+                display: inline-grid;
+                grid-template-rows: repeat(4, 20%);
+                grid-template-columns:25% 50% 25%;
+                row-gap: 5%;}
+
+            .human{
+                width: 100%;
+                height:100%;
+                display: inline-grid;
+                box-shadow: 0 0 10px rgba(0,0,0,0.5);
+                grid-template-columns: 40% 60%;
+                grid-template-rows:100%;}
+
+            .pic{
+                width: 100%;
+                height:100%;
+                grid-column: 1;
+                grid-row: 1;}
+
+            .block_h{
+              grid-column: 2;
+              display: inline-grid;
+              grid-template-rows: 20% 45%;
+              gap:10%;
+              align-items: center;
+            }
+            .main_t{
+                font-family: "Noto Sans", sans-serif;
+                font-size: 1.25vw;
+                color: rgb(0, 0, 0,0.8);
+                text-align: center;
+                grid-row:2; }
+
+            .main_title{
+                font-family: "Open Sans", sans-serif;
+                width:100%;
+                font-size: 1.5vw;
+                color: black;
+                text-align: center;
+                font-weight: bold;
+                grid-row: 1;}
+
+  </style>
+  </head>
+  <body>  
+    <nav class="site_nav">
+      <a href="Novam_Vitam.html" class="nav_name">Novam Vitam</a>
+      <a href="Designs.html" class="nav_link" style="grid-column: 4;">Designs</a>
+      <a href="Team.html" class="nav_link" style="grid-column: 5;">Team</a>
+      <a href="Comments.html" class="nav_link" style="grid-column: 6;">Comments</a> 
+      <a href="Contact.html" class="nav_link" style="grid-column: 7;">Contact</a>
+    </nav>
+        <div class="header_backg">
+            <p class="header_text">Team</p>
+        </div>  
+        <ul class="breadcrumb">
+          <li><a href="Novam_Vitam.html">Novam Vitam</a></li> 
+          <li>Team</li>
+        </ul>
+        <div class="titl">
+        <hr style="grid-row:1">
+        <p class="title title_lines">Introduction</p>
+        <p class="main_text">And now we will introduce you to our little family. To get to know each designer and their personal portfolio better, follow the link to their personal pages.</p>
+        <hr style="grid-row: 4;">
+        </div>
+        <section class="team_gen_block">
+            <div class="human" style="grid-row:1; grid-column-start: 1; grid-column-end: 3;">
+                <div class="block_h"> 
+                    <a href="Potapchuck.html" class="main_title title_lines" style="text-decoration: none;">Tania Potapchuck</a>
+                    <p class="main_t">The creator of our large family and also the CEO of the company. Chief designer. Specialization: interior decoration and decoration of objects.</p>
+                </div>
+                <div class="pic"><img src="..\foto\IMG_20210406_020520_026.jpg" alt="Tania" style="width:100%; height:100%"></div>  
+            </div>
+            <div class="human" style="grid-row:2; grid-column-start: 2; grid-column-end: 4;">
+                <div class="block_h">
+                  <p class="main_title title_lines">Helena Porkhomenko</p>
+                    <p class="main_t">Public Relations Director. Exterior designer.</p>  
+                </div>
+                <div class="pic"><img src="..\foto\IMG_20210406_020551_546.jpg" alt="Lena" style="width:100%; height:100%"></div>
+            </div>
+            <div class="human" style="grid-row:3; grid-column-start: 1; grid-column-end: 3;">
+                <div class="block_h">
+                    <p class="main_title title_lines">Lina Bukina</p>
+                    <p class="main_t">Media director of the company. Co-founder of the company. Designer of separate interior decoration, small decor items.</p>
+                </div>
+                <div class="pic"><img src="..\foto\IMG_20210406_020702_427.jpg" alt="Lina" style="width:100%; height:100%"></div>
+            </div>
+            <div class="human" style="grid-row:4; grid-column-start: 2; grid-column-end: 4;">
+                <div class="block_h">
+                   <p class="main_title title_lines">Illia Kerimov</p>
+                    <p class="main_t">Best Designer of the Year. Main activity: interior decoration of office buildings.</p> 
+                </div>
+                <div class="pic"><img src="..\foto\IMG_20210406_020711_598.jpg" alt="Illia" style="width:100%; height:100%"></div>
+            </div>
+        </section>
+    <flooter class="site_flooter">  
+          <div class="flooter_block" style="grid-column: 2;">
+            <a href="Novam_Vitam.html" class="flooter_gen_text">Novam Vitam</a>
+            <div class="flooter_block_text">
+              <a href="Designs.html" class="text_flooter" style="grid-row: 1;">Designs</a>
+              <a href="Team.html" class="text_flooter" style="grid-row: 2;">Team</a>
+              <a href="Comments.html" class="text_flooter" style="grid-row: 3;">Comments</a> 
+              <a href="Contact.html" class="text_flooter" style="grid-row: 4;">Contact</a>
+            </div>
+          </div>
+          <div class="flooter_block" style="grid-column: 3;">
+            <p class="flooter_gen_text">Social networks</p>
+            <div class="flooter_block_text">
+              <a href="https://instagram.com/tanyapotapchukk?igshid=42vvx0qkxv19" class="text_flooter" style="grid-row: 1;">Instagram</a>
+              <a href="https://web.telegram.org/#/im?p=@titanik696" class="text_flooter" style="grid-row: 2;">Telegram</a>
+              <a href="" class="text_flooter" style="grid-row: 3;">Viber</a> 
+              <a href="https://instagram.com/titanik696?igshid=1kgw1qjba0gia" class="text_flooter" style="grid-row: 4;">Instagram-works</a>
+            </div>
+          </div>
+          <p class="search_gen_text">Search</p>
+            <form action="" method="post" class="search">
+              <input type="search" name="" placeholder="Search" class="input">
+              <input type="submit" name="" value="" class="submit">
+            </form>
+            <p class="text_bottom">© Novam Vitam, 2021, Alesia Drakonova</p>
+    </flooter> 
+  </body>
+</html>

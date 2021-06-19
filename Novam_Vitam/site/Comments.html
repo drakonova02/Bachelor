@@ -1,0 +1,543 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <title>Comments - Novam Vitam</title>
+
+    <script language="JavaScript">
+        document.onselectstart=function(){return false}
+        document.oncontextmenu=function(){return false}
+    </script>
+
+    <style>
+      /* general */
+      *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;} 
+
+        .title{
+        font-family: "Open Sans", sans-serif;
+        font-size: 1.5vw;
+        color: black;
+        text-align: center;
+        font-weight: bold;
+        grid-row: 2;}
+
+      .title_lines{
+        overflow: hidden;}
+
+      .title_lines:before,
+      .title_lines:after {
+	      content: '';
+      	display: inline-block;
+      	vertical-align: middle;
+      	box-sizing: border-box;
+      	width: 13.5%;
+	      height: 1.5%;
+	      background: black;
+      	border: solid black;
+      	border-width: 0 0.5vw;}
+
+      .title_lines:before {
+	      margin-left: -100%;}
+
+      .title_lines:after {
+        margin-right: -100%;}
+      
+        body{
+        height: 140.5%;
+        display: inline-grid;
+        grid-template-rows: 48% 1.5% 15.2% 55% 28%;
+        row-gap: 3%;
+        grid-template-columns: 0% 85% 0%;
+        column-gap: 7.5%;
+        background-color: whitesmoke;}
+
+/* menu */
+      .site_nav{
+        width: 100%;
+        grid-column-start:1 ;
+        grid-column-end: 3;
+        height: 8vh;
+        background-color: black;
+        display: inline-grid;
+        grid-template-rows: 0% 50%;
+        grid-template-columns: 0% 20% 25% 5% 4% 7% 5%;
+        column-gap: 5%;
+        row-gap: 25%;
+        position: fixed;
+        margin-top: 2%;
+        z-index: 3;
+        background: rgba(0, 0, 0, 0.9);
+        align-items: center;
+        top: 0;
+        bottom: 0;}
+
+      .nav_name{
+        font-family: "Raleway", sans-serif; 
+        font-weight: 800;
+        font-size: 2.5vw;
+        color: whitesmoke;
+        text-decoration: none;
+        grid-row:2;
+        grid-column:2;}
+
+      .nav_link{
+        color:whitesmoke;
+        text-decoration: none;
+        font-size:1.35vw;
+        font-family: "Open Sans", sans-serif;
+        grid-row:2;}
+
+      .nav_link:hover{
+        color:#ff5050;
+        /*text-decoration:underline;*/}
+
+
+/*flooter*/
+        .site_flooter{
+          width:100%;
+          height: 100%;
+          background-color: black;
+          display: inline-grid;
+          grid-template-rows: 0% 10% auto 14%;
+          row-gap: 10%;
+          grid-template-columns: 0% 20% 20% 20%;
+          column-gap: 5.5%;
+          background: rgba(0, 0, 0, 0.8);
+          grid-row: 5;
+          grid-column-start:1 ;
+          grid-column-end: 4;}
+
+        .flooter_block{
+          display: inline-grid;
+          grid-template-rows: 20% 70%;
+          row-gap: 7%;
+          height: 100%;
+          width:26vw;
+          grid-row:2/4;}
+
+        .flooter_block_text{
+          display: inline-grid;
+          grid-row:2;
+          grid-template-rows: auto;
+          gap:10%;
+          height: 100%;}
+
+        .flooter_gen_text{
+          grid-row:1;
+          font-family: "Raleway", sans-serif;
+          font-size: 1.3vw;
+          color: #ff5050;
+          font-weight: 600;
+          font:bold;
+          text-decoration: underline}
+
+        .text_flooter{
+            font-family: "Noto Sans", sans-serif;
+            font-size: 1vw;
+            color: whitesmoke;
+            text-decoration: none;}
+        
+  /*Search*/
+        .search {
+	        width: 30vw;
+          height: 35%;
+	        position: relative;
+          grid-row:3;
+          grid-column: 4;}
+
+        .search_gen_text{
+          font-family: "Raleway", sans-serif;
+          font-size: 1.3vw;
+          color: #ff5050;
+          font-weight: 600;
+          font:bold; 
+          text-decoration: underline;
+          grid-row:2;
+          grid-column: 4;}
+
+        .search input{
+	      border:rgba(0,0,0,0.5);}
+
+        .input {
+	        width: 100%;
+          height: 100%;
+	        padding: 2.5% 10% 2.5% 5%;
+	        box-shadow: inset 0 0 3% rgba(0, 0, 0, 0.9);
+          background: whitesmoke;
+	        font: 1.3vw "Noto Sans", sans-serif;
+	        color: #333;}
+
+        .input:focus {
+	        box-shadow: inset 0 0 5px rgba(0,0,0,0.2), inset 0 1px 2px rgba(0,0,0,0.4);
+	        background: whitesmoke;
+	        color: #333;}
+
+        .submit {
+	      position: absolute;
+	      top: 0;
+	      right: 0;
+        width: 12.5%;
+	      height: 100%;
+        cursor: pointer;
+	      background: url(https://lh4.googleusercontent.com/-b-5aBxcxarY/UAfFW9lVyjI/AAAAAAAABUg/gQtEXuPuIds/s13/go.png) 50% no-repeat;
+	      opacity: 0.9;}
+
+        .search .submit:hover {
+	        opacity: 1;}
+        
+        .text_bottom{
+          color:rgba(165, 162, 162, 0.6);
+          float:left;
+          grid-row:4;
+          font-size: 1vw;
+          height:100%;
+          grid-column: 2;}
+
+/*Header*/
+        .header_backg{
+            grid-row: 1;
+            background-image: url(https://images.hdqwalls.com/wallpapers/minimalist-abstract-shaping-4k-wm.jpg);
+            background-size: cover;
+              background-repeat: no-repeat; 
+              display: inline-grid;
+              grid-template-rows: 0% 20%;
+              row-gap: 45%;
+              grid-template-columns: 0% 15%;
+              column-gap: 42.5%;
+              align-items: center;
+              grid-column-start:1 ;
+              grid-column-end: 4;}
+
+        .header_text{
+            font-family: 'Playfair Display SC', serif;
+            grid-row: 2;
+            grid-column: 2;
+            font-size: 4.5vw;
+            color:white;
+            text-shadow: rgb(0, 0, 0) 1px 1px 2px;}
+
+/*Main bac*/
+           .titl{
+              grid-row:3;
+              grid-column: 2;
+              display: inline-grid;
+              grid-template-rows: 1.25% 15% 30% 1.5%;
+              row-gap: 17%;
+              align-items: center;}
+
+            hr{
+                background-color:rgb(0, 0, 0,0.8);
+                width: 100%;
+                height: 100%;
+                grid-column: 1;}
+
+            .main_text{
+                font-family: "Noto Sans", sans-serif;
+                font-size: 1.25vw;
+                color: rgb(0, 0, 0,0.8);
+                text-align: center;
+                padding-right: 1.5%;
+                padding-left: 1.5%;
+                grid-row: 3;
+                grid-column: 1;}
+
+                .breadcrumb{
+              grid-row: 2;
+              grid-column: 2;
+              width: 100%;
+              list-style: none;
+              font-family: "Open Sans", sans-serif;
+              font-size:1.35vw;}
+
+            ul.breadcrumb li+li:before {
+              padding: 8px;
+              color: black;
+              content: "/\00a0";}
+            
+            li{
+              display: inline;
+            }
+
+            li a{
+              color:black;
+              text-decoration: none;
+              font-size:1.35vw;
+              font-family: "Open Sans", sans-serif;}
+
+            li a:hover{
+              color: #ff5050;
+              text-decoration: underline;
+            }
+
+        .comment{
+          grid-row: 4;
+          grid-column: 2;
+          display: grid;
+          grid-template-columns: 47.5% 47.5%;
+          grid-template-rows: 1fr 2fr 1fr;
+          column-gap: 5%;}
+
+        textarea{
+          resize: none; 
+          background: rgba(0, 0, 0, 0.8);
+          font-size: 1.25vw;
+          color: whitesmoke;
+          border-radius: 2.5px;
+          padding-left: 0.5%;
+          grid-column: 1;
+          box-shadow: 0 5px 5px rgba(0,0,0,0.5);
+          font-family: "Open Sans", sans-serif;}
+        
+        textarea::placeholder {
+          color: #ff5050;}
+
+        .save{
+          width: 100%; 
+          height: 90%;
+          background: rgba(0, 0, 0, 0.8);
+          color:whitesmoke;
+          border-radius: 2.5px;
+          font-size: 1.25vw;
+          box-shadow: 0 10px 10px rgba(0,0,0,0.5);
+          grid-column: 2;}
+
+        .print{
+          grid-row: 2; 
+          grid-column: 2;
+          display: grid; 
+          grid-template-columns: 80% auto; 
+          grid-template-rows: 80% 15%; 
+          row-gap: 5%;}
+
+        .but{
+          grid-column: 2;
+          grid-row: 1;
+          display: inline-grid;
+          grid-template-columns: 50% 50%;
+          grid-template-rows: 1fr;
+          width: 100%; 
+          height: 100%;
+          align-items: center;
+        }
+
+        form div button{
+          margin-left: 1%;
+          border: none;
+          background-color: whitesmoke;
+          grid-column: 1;
+          width: 24px;
+          height: 24px;
+        }
+
+        form div button:hover{
+          background-color: lightgray;
+        }
+
+        .text{
+          font-family: "Open Sans", sans-serif;
+          resize: none; 
+          background: rgba(0, 0, 0, 0.8);
+          font-size: 1.25vw;
+          color: whitesmoke;
+          border-radius: 2.5px;
+          padding-left: 0.5%;
+          grid-column: 1;
+          grid-row: 1/4;
+          height: 100%;
+          width:100%;
+          box-shadow: 0 5px 5px rgba(0,0,0,0.5);}
+  </style>
+
+  </head>
+  <body>  
+    <nav class="site_nav">
+      <a href="Novam_Vitam.html" class="nav_name">Novam Vitam</a>
+      <a href="Designs.html" class="nav_link" style="grid-column: 4;">Designs</a>
+      <a href="Team.html" class="nav_link" style="grid-column: 5;">Team</a>
+      <a href="Comments.html" class="nav_link" style="grid-column: 6;">Comments</a> 
+      <a href="Contact.html" class="nav_link" style="grid-column: 7;">Contact</a>
+    </nav>
+        <div class="header_backg">
+            <p class="header_text" id="elem">Comments</p>
+        </div>  
+        <ul class="breadcrumb">
+          <li><a href="Novam_Vitam.html">Novam Vitam</a></li> 
+          <li>Comments</li>
+        </ul>
+        <p style="grid-column: 2; grid-row: 2; text-align: right; font-size: 2.5vw; color: #ff5050;" id="clock"></p>
+        <div class="titl">
+        <hr style="grid-row:1">
+        <p class="title title_lines">Introduction</p>
+        <p class="main_text">We are glad to see you on our website. And we will also be happy if you leave your positive feedback so that future buyers can correctly evaluate our company. thanks</p>
+        <hr style="grid-row: 4;">
+        </div>
+        <form id="myform" class="comment">
+          <div class="but" name="butt" value="1">
+            <button type="button" id="bold" style="grid-row: 1; margin-left: 1%;" onclick="isBold()" value="0"><img src="https://img.icons8.com/android/24/000000/bold.png"/></button>
+            <button type="button" id="italic" style="grid-row: 1; margin-left: 10%;" onclick="isItalic()" value="0"><img src="https://img.icons8.com/small/25/000000/italic.png"/></button>
+            <button type="button" id="strikethrough" style="grid-row: 1; margin-left: 20%;" value="0" onclick="isStrike()"><img src="https://img.icons8.com/material/24/000000/strikethrough--v1.png"/></button>
+            <button type="button" id="increase" style="grid-row: 1; margin-left: 30%;"><img src="https://img.icons8.com/material-sharp/24/000000/increase-font.png"/></button>
+            <button type="button" id="decrease" style="grid-row: 1; margin-left: 40%;"><img src="https://img.icons8.com/material-sharp/24/000000/decrease-font.png"/></button>
+            <button type="button" id="color" style="grid-row: 1; margin-left: 50%;" value="0" onclick="Color()"><img src="https://img.icons8.com/material-sharp/24/000000/text-color.png"/></button>
+            <ul id="colors" style="grid-column: 2; display: none; text-align: center;">
+              <li><a onclick="Green()" style="color:#50ffb6;">Green</a></li>
+              <li><a onclick="Blue()" style="color: #50aaff;">Blue</a></li>
+              <li><a onclick="Orange()" style="color:#FF9900;">Orange</a></li>
+              <li><a onclick="Red()" style="color:#ff5050;">Red</a></li>
+              <li><a onclick="Pink()" style="color:#ff50b6;">Pink</a></li>
+              <li><a onclick="White()" style="color:black;">Standart</a></li>
+            </ul>
+          </div>
+          <p class="print">
+            <textarea style="width: 100%; height: 100%; grid-column:1/3;" id="comment" maxlength="500" placeholder="Comment..."></textarea>
+            <textarea style="width: 50%; height: 90%;" id="name" maxlength="30" placeholder="My name..."></textarea>
+            <button class="save" type="button" id="send">Send</button>
+          </p>
+          <div class = "text"  id="writeComment" readonly></div>
+        </form>
+        <flooter class="site_flooter">  
+          <div class="flooter_block" style="grid-column: 2;">
+            <a href="Novam_Vitam.html" class="flooter_gen_text">Novam Vitam</a>
+            <div class="flooter_block_text">
+              <a href="Designs.html" class="text_flooter" style="grid-row: 1;">Designs</a>
+              <a href="Team.html" class="text_flooter" style="grid-row: 2;">Team</a>
+              <a href="Comments.html" class="text_flooter" style="grid-row: 3;">Comments</a> 
+              <a href="Contact.html" class="text_flooter" style="grid-row: 4;">Contact</a>
+            </div>
+          </div>
+          <div class="flooter_block" style="grid-column: 3;">
+            <p class="flooter_gen_text">Social networks</p>
+            <div class="flooter_block_text">
+              <a href="https://instagram.com/tanyapotapchukk?igshid=42vvx0qkxv19" class="text_flooter" style="grid-row: 1;">Instagram</a>
+              <a href="https://web.telegram.org/#/im?p=@titanik696" class="text_flooter" style="grid-row: 2;">Telegram</a>
+              <a href="" class="text_flooter" style="grid-row: 3;">Viber</a> 
+              <a href="https://instagram.com/titanik696?igshid=1kgw1qjba0gia" class="text_flooter" style="grid-row: 4;">Instagram-works</a>
+            </div>
+          </div>
+          <p class="search_gen_text">Search</p>
+            <form action="" method="post" class="search">
+              <input type="search" name="" placeholder="Search" class="input">
+              <input type="submit" name="" value="" class="submit">
+            </form>
+            <p class="text_bottom">© Novam Vitam, 2021, Alesia Drakonova</p>
+    </flooter> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> 
+    <script type="text/javascript">
+    var myVar = setInterval(function() {myTimer();}, 1000);
+    function myTimer() {
+      var d = new Date();
+      document.getElementById("clock").innerHTML = d.toLocaleTimeString();
+    }
+alert(elem.outerHTML);
+      $(document).ready(function() {
+      $("#send").click(function() {
+      let n = localStorage.length / 3;
+      localStorage.setItem("author" + n, $("#name").val());
+      localStorage.setItem("text" + n, JSON.stringify($("#comment").val()));
+      let a = [$("#comment").css("fontWeight"), $("#comment").css("fontStyle"), $("#comment").css("textDecoration"), $("#comment").css("font-size"), $("#comment").css("color")];
+      localStorage.setItem("style" + n, JSON.stringify(a));
+      $("<p>" + $("#name").val() + "</p>").appendTo($("#writeComment"));
+        $("<p style='margin-top:2%; margin-bottom:2%; font-weight: "+ a[0] + "; font-style:" + a[1] + "; text-decoration:" + a[2] + "; font-size:" + a[3] + "; color:" + a[4] + ";'>"+ $("#comment").val() +"</p>").appendTo($("#writeComment"));
+      });
+      for(let i = 0; i < Math.floor(localStorage.length / 3); ++i){
+        let b =JSON.parse(localStorage.getItem(("style" + i)));
+        $("<p>" + localStorage.getItem("author" + i) + "</p>").appendTo($("#writeComment"));
+        $("<p style='margin-top:2%; margin-bottom:2%; font-weight: "+ b[0] + "; font-style:" + b[1] + "; text-decoration:" + b[2] + "; font-size:" + b[3] + "; color:" + b[4] + ";'>"+ localStorage.getItem("text" + i) +"</p>").appendTo($("#writeComment"));
+        };
+      });
+
+      function isBold(){
+        let text = document.getElementById("comment");
+        let b = document.getElementById("bold");
+        if(b.value == "0"){
+          text.style.fontWeight = "bold";
+          b.value = "1";
+        }
+        else {
+          text.style.fontWeight = "normal"
+          b.value = "0";
+        }
+      }
+
+      function isItalic(){
+        let text = document.getElementById("comment");
+        let b = document.getElementById("italic");
+        if(b.value == "0"){
+          text.style.fontStyle = "italic";
+          b.value = "1";
+        }
+        else {
+          text.style.fontStyle = "normal"
+          b.value = "0";
+        }
+      }
+
+      function isStrike(){
+        let text = document.getElementById("comment");
+        let b = document.getElementById("strikethrough");
+        if(b.value == "0"){
+          text.style.textDecoration = "line-through";
+          b.value = "1";
+        }
+        else {
+          text.style.textDecoration = "none"
+          b.value = "0";
+        }
+      }
+
+        $(document).ready(function() {
+        $("#increase").click(function() {
+        $("#comment").css("font-size","+=0.05vw");});});
+
+        $(document).ready(function() {
+        $("#decrease").click(function() {
+        $("#comment").css("font-size","-=0.05vw");});});
+
+      function Color(){
+        let x = document.getElementById("colors");
+        let b = document.getElementById("color");
+        if(b.value == "0"){
+          x.style.display = "inline-grid"
+          b.value = "1"
+        }
+        else{
+          x.style.display = "none";
+          b.value = "0";
+        }
+      }
+
+      function Green(){
+        let text = document.getElementById("comment");
+        text.style.color = "#50ffb6";
+      }
+
+      function Blue(){
+        let text = document.getElementById("comment");
+        text.style.color = "#50aaff";
+      }
+
+      function Orange(){
+        let text = document.getElementById("comment");
+        text.style.color = "#FF9900";
+      }
+
+      function Red(){
+        let text = document.getElementById("comment");
+        text.style.color = "#ff5050";
+      }
+
+      function Pink(){
+        let text = document.getElementById("comment");
+        text.style.color = "#ff50b6";
+      }
+      
+      function White(){
+        let text = document.getElementById("comment");
+        text.style.color = "whitesmoke";
+      }
+    </script> 
+  </body>
+</html>
