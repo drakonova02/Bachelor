@@ -1,0 +1,450 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <title>Novam Vitam</title>
+
+    <script language="JavaScript">
+      document.onselectstart=function(){return false}
+      document.oncontextmenu=function(){return false}
+  </script>
+
+    <style>
+      /* general */
+      *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;} 
+
+      .title{
+        font-family: "Open Sans", sans-serif;
+        font-size: 1.6vw;
+        color: whitesmoke;
+        text-align: center;
+        font-weight: bold;
+        grid-row: 2;}
+
+      .title_lines{
+        overflow: hidden;}
+
+      .title_lines:before,
+      .title_lines:after {
+	      content: '';
+      	display: inline-block;
+      	vertical-align: middle;
+      	box-sizing: border-box;
+      	width: 13%;
+	      height: 0.2vw;
+	      background: whitesmoke;
+      	border: solid whitesmoke;
+      	border-width: 0 0.5vw;}
+
+      .title_lines:before {
+	      margin-left: -100%;}
+
+      .title_lines:after {
+        margin-right: -100%;}
+      
+      body{
+          display: inline-grid;
+          grid-template-rows: 0% 25% 70% 75% 30%;
+          row-gap: 31.5%;
+          grid-template-columns: 100%;}
+
+/* bg-img */
+      .bg-grad{
+        z-index:-1;
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        -webkit-transition: opacity 15s linear;
+        opacity: 0;
+        transition: opacity 5s linear;}
+
+      .bg-grad.active{
+        opacity: 1;} /*прозрачность*/
+
+      .bg-grad.one{
+        background-position: top;
+        background-repeat: no-repeat;
+        position: fixed;
+        background-size: cover;
+        background-image: url(https://storage.picsave.pp.ua/view/0/46/original);}
+
+      .bg-grad.two{
+        background-position: top;
+        background-repeat: no-repeat;
+        position: fixed;
+        background-size: cover;
+        background-image: url(https://storage.picsave.pp.ua/view/0/169/original);}
+
+      .bg-grad.three{
+        background-position: top;
+        background-repeat: no-repeat;
+        position: fixed;
+        background-size: cover;
+        background-image: url(https://million-wallpapers.ru/wallpapers/4/95/15769044620455479312.jpg);}
+
+      .bg-grad.four{
+        background-position: top;
+        background-repeat: no-repeat;
+        position: fixed;
+        background-size: cover;
+        background-image: url(https://img2.goodfon.ru/wallpaper/nbig/1/56/interer-vannaia-komnata-dizain.jpg);}
+
+      .bg-grad.five{
+        background-position: top;
+        background-repeat: no-repeat;
+        position: fixed;
+        background-size: cover;
+        background-image: url(https://img4.goodfon.ru/wallpaper/nbig/e/e4/interer-kukhnia-osobniak-stol-kitchen.jpg);}
+
+/* menu */
+      .site_nav{
+        width: 100%;
+        height: 8vh;
+        background-color: black;
+        display: inline-grid;
+        grid-template-rows: 0% 50%;
+        grid-template-columns: 0% 20% 25% 5% 4% 7% 5%;
+        column-gap: 5%;
+        row-gap: 25%;
+        position: fixed;
+        margin-top: 2%;
+        z-index: 3;
+        background: rgba(0, 0, 0, 0.9);
+        align-items: center;}
+
+      .nav_name{
+        font-family: "Raleway", sans-serif; 
+        font-weight: 800;
+        font-size: 2.5vw;
+        color: whitesmoke;
+        text-decoration: none;
+        grid-row:2;
+        grid-column:2;}
+
+      .nav_link{
+        color:whitesmoke;
+        text-decoration: none;
+        font-size:1.35vw;
+        font-family: "Open Sans", sans-serif;
+        grid-row:2;}
+
+      .nav_link:hover{
+        color:#FF9900;
+        /*text-decoration:underline;*/}
+
+/* video_block*/
+     .site_video{
+        width:100%;
+        height: 100%;
+        background-color: black;
+        display: inline-grid;
+        grid-template-rows: 0% 5% 80%;
+        row-gap: 5%;
+        grid-template-columns: 0% 60% 0%;
+        column-gap: 20%;
+        background: rgba(0, 0, 0, 0.8);
+        grid-row:3;}
+
+      .video{
+        width:100%;
+        height:100%;
+        grid-row: 3;
+        grid-column: 2;}
+
+/* intro */
+      .site_intro{
+        width:100%;
+        height: 100%;
+        background-color: black;
+        display: inline-grid;
+        grid-template-rows: 0% 12% 25% 10%;
+        row-gap: 12%;
+        background: rgba(0, 0, 0, 0.8);
+        grid-row: 2;} 
+
+      .intro_text{
+        font-family: "Noto Sans", sans-serif;
+        font-size: 1.45vw;
+        color: whitesmoke;
+        text-align: center;
+        padding-right: 1.5%;
+        padding-left: 1.5%;}     
+
+/* Open info */
+      .site_info{
+        width:100%;
+        height: 100%;
+        background-color: black;
+        display: inline-grid;
+        grid-template-rows:   0% 5% 25% 25% 25%;
+        row-gap: 4%;
+        grid-template-columns: 0% 31% 31% 0%;
+        column-gap: 12.6%;
+        background: rgba(0, 0, 0, 0.8);
+        grid-row:4;}
+
+      .info_el{
+        height: 100%;
+        display:inline-grid;
+        grid-template-rows: 20% auto;
+        grid-template-columns: 8% auto;
+        row-gap:5%;}
+      
+      .info_gen_text{
+        font-family: "Noto Sans", sans-serif;
+        font-size: 1.5vw;
+        color: whitesmoke;
+        font-weight: 600;
+        padding-right: 5%;
+        font:bold; 
+        text-decoration: underline;
+        grid-row: 1;
+        grid-column: 3;}
+      
+      .info_text{
+        font-family: "Noto Sans", sans-serif;
+        font-size: 1.35vw;
+        color: whitesmoke;
+        padding-right: 1.5%;
+        padding-left: 1.5%;
+        padding-top: 1.5%;
+        text-align: justify;
+        grid-row:2;
+        grid-column-start: 1;
+        grid-column-end: 4;}
+
+      .info_icon{
+        width:2vw;
+        height:100%;
+        color:#FF9900;
+        grid-row:1;
+        grid-column:1;
+        margin-left: 10%;}
+ 
+/*flooter*/
+        .site_flooter{
+          width:100%;
+          height: 100%;
+          background-color: black;
+          display: inline-grid;
+          grid-template-rows: 0% 10% auto 14%;
+          row-gap: 10%;
+          grid-template-columns: 0% 20% 20% 20%;
+          column-gap: 5.5%;
+          background: rgba(0, 0, 0, 0.8);
+          grid-row: 5;}
+
+        .flooter_block{
+          display: inline-grid;
+          grid-template-rows: 20% 70%;
+          row-gap: 7%;
+          height: 100%;
+          width:26vw;
+          grid-row:2/4;}
+
+        .flooter_block_text{
+          display: inline-grid;
+          grid-row:2;
+          grid-template-rows: auto;
+          gap:10%;
+          height: 100%;}
+
+        .flooter_gen_text{
+          grid-row:1;
+          font-family: "Raleway", sans-serif;
+          font-size: 1.3vw;
+          color: #FF9900;
+          font-weight: 600;
+          font:bold;
+          text-decoration: underline}
+
+        .text_flooter{
+            font-family: "Noto Sans", sans-serif;
+            font-size: 1vw;
+            color: whitesmoke;
+            text-decoration: none;}
+        
+  /*Search*/
+        .search {
+	        width: 30vw;
+          height: 35%;
+	        position: relative;
+          grid-row:3;
+          grid-column: 4;}
+
+        .search_gen_text{
+          font-family: "Raleway", sans-serif;
+          font-size: 1.3vw;
+          color: #FF9900;
+          font-weight: 600;
+          font:bold; 
+          text-decoration: underline;
+          grid-row:2;
+          grid-column: 4;}
+
+        input {
+	      border:rgba(0,0,0,0.5);}
+
+        .input {
+	        width: 100%;
+          height: 100%;
+	        padding: 2.5% 10% 2.5% 5%;
+	        box-shadow: inset 0 0 3% rgba(0, 0, 0, 0.9);
+          background: whitesmoke;
+	        font: 1.3vw "Noto Sans", sans-serif;
+	        color: #333;}
+
+        .input:focus {
+	        box-shadow: inset 0 0 5px rgba(0,0,0,0.2), inset 0 1px 2px rgba(0,0,0,0.4);
+	        background: whitesmoke;
+	        color: #333;}
+
+        .submit {
+	      position: absolute;
+	      top: 0;
+	      right: 0;
+        width: 12.5%;
+	      height: 100%;
+        cursor: pointer;
+	      background: url(https://lh4.googleusercontent.com/-b-5aBxcxarY/UAfFW9lVyjI/AAAAAAAABUg/gQtEXuPuIds/s13/go.png) 50% no-repeat;
+	      opacity: 0.9;}
+
+        .search .submit:hover {
+	        opacity: 1;}
+        
+        .text_bottom{
+          color:rgba(165, 162, 162, 0.6);
+          float:left;
+          grid-row:4;
+          font-size: 1vw;
+          height:100%;
+          grid-column: 2;}
+    </style>
+  </head>
+  <body>
+    <div>
+      <div class="bg-grad one active"></div>
+      <div class="bg-grad two"></div>
+      <div class="bg-grad three"></div>
+      <div class="bg-grad four"></div>
+      <div class="bg-grad five"></div>
+    </div>
+    <nav class="site_nav">
+      <a href="Novam_Vitam.html" class="nav_name">Novam Vitam</a>
+      <a href="Designs.html" class="nav_link" style="grid-column: 4;">Designs</a>
+      <a href="Team.html" class="nav_link" style="grid-column: 5;">Team</a>
+      <a href="Comments.html" class="nav_link" style="grid-column: 6;">Comments</a> 
+      <a href="Contact.html" class="nav_link" style="grid-column: 7;">Contact</a>
+    </nav>
+      <section class="site_intro">
+        <p class="title title_lines">WELCOME TO OUR SITE</p>
+        <p class="intro_text" style="grid-row: 3;">We are happy to see you on our website. Here you can find a lot of interesting things for you and your family. The idea of our company is that we give a second chance to life for your things: starting with children's toys and ending with the complete re-transformation of your home.</p>
+        <p class="intro_text" style="grid-row: 4;">We are waiting for your call and order.</p>
+      </section>
+      <section class="site_video">
+        <p class="title title_lines" style="grid-column: 2;">WHAT WE CAN SAY ABOUT OURSELVES</p>
+        <iframe class="video" src="https://www.youtube.com/embed/3338AIZXWXw?start=61" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+     
+      </section>
+      <section class="site_info"> 
+      <p class="title title_lines" style="grid-column-start:2; grid-column-end: 4;">WE ARE GOOD AT</p>
+      <div class="info_el" style="grid-row:3; grid-column: 2;">
+        <svg class="bi bi-upc-scan info_icon" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z"/>
+              <path d="M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z"/>
+        </svg>
+        <p class="info_gen_text" >Unique things</p>
+        <p class="info_text">All the things you bought were designed by designers that know a sense of style. Each thing has its own story and uniqueness. These things can be called new or modernized antiques.</p>
+      </div>
+      <div class="info_el" style="grid-row:3; grid-column: 3;">
+        <svg class="bi bi-emoji-smile info_icon" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+          <path fill-rule="evenodd" d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683z"/>
+          <path d="M7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z"/>
+        </svg>
+        <p class="info_gen_text">Direct contact</p>
+        <p class="info_text">After placing your order, within a couple of days you will receive direct contact with the designer, and not the curator, who may "misunderstand" you.</p>
+      </div>
+      <div class="info_el" style="grid-row:4; grid-column: 2;">
+        <svg class="bi bi-check-square info_icon" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+          <path fill-rule="evenodd" d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z"/>
+        </svg>
+        <p class="info_gen_text">Best quality</p>
+        <p class="info_text">The manufacturers of our materials are the best on the market. Warranty on your purchases 2 years</p>
+      </div>
+      <div class="info_el" style="grid-row:4; grid-column: 3;">
+        <svg class="bi bi-brightness-high info_icon"viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+        </svg>
+        <p class="info_gen_text">Ecology</p>
+        <p class="info_text">Environmental problems today are initial for us, for this our company was created. Help nature with us, not throwing away old things, but giving them Novam Vitam</p>
+      </div>
+      <div class="info_el" style="grid-row:5; grid-column: 2;">
+        <svg class="bi bi-house info_icon" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+          <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+        </svg>
+        <p class="info_gen_text">Online service</p>
+        <p class="info_text">You can order our services through the website or at remote points "Novam Vitam".
+          Your purchase will come to you by mail or you will be picked up at one of our company’s stores.</p>
+      </div>
+      <div class="info_el" style="grid-row:5; grid-column: 3;">
+        <svg class="bi bi-command info_icon" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 0 0 3.5 5H5V3.5a1.5 1.5 0 1 0-3 0zM6 6V3.5A2.5 2.5 0 1 0 3.5 6H6zm8-2.5A1.5 1.5 0 0 1 12.5 5H11V3.5a1.5 1.5 0 0 1 3 0zM10 6V3.5A2.5 2.5 0 1 1 12.5 6H10zm-8 6.5A1.5 1.5 0 0 1 3.5 11H5v1.5a1.5 1.5 0 0 1-3 0zM6 10v2.5A2.5 2.5 0 1 1 3.5 10H6zm8 2.5a1.5 1.5 0 0 0-1.5-1.5H11v1.5a1.5 1.5 0 0 0 3 0zM10 10v2.5a2.5 2.5 0 1 0 2.5-2.5H10z"/>
+          <path fill-rule="evenodd" d="M10 6H6v4h4V6zM5 5v6h6V5H5z"/>
+        </svg>
+        <p class="info_gen_text">Communication</p>
+        <p class="info_text">You can contact us through the website, by phone or simply contact one of the remote points of the company. You will be answered within an hour.</p>
+      </div>
+      </section>
+    <flooter class="site_flooter">  
+      <div class="flooter_block" style="grid-column: 2;">
+        <a href="Novam_Vitam.html" class="flooter_gen_text">Novam Vitam</a>
+        <div class="flooter_block_text">
+          <a href="Designs.html" class="text_flooter" style="grid-row: 1;">Designs</a>
+          <a href="Team.html" class="text_flooter" style="grid-row: 2;">Team</a>
+          <a href="Comments.html" class="text_flooter" style="grid-row: 3;">Comments</a> 
+          <a href="Contact.html" class="text_flooter" style="grid-row: 4;">Contact</a>
+        </div>
+      </div>
+      <div class="flooter_block" style="grid-column: 3;">
+        <p class="flooter_gen_text">Social networks</p>
+        <div class="flooter_block_text">
+          <a href="https://instagram.com/tanyapotapchukk?igshid=42vvx0qkxv19" class="text_flooter" style="grid-row: 1;">Instagram</a>
+          <a href="https://web.telegram.org/#/im?p=@titanik696" class="text_flooter" style="grid-row: 2;">Telegram</a>
+          <a href="" class="text_flooter" style="grid-row: 3;">Viber</a> 
+          <a href="https://instagram.com/titanik696?igshid=1kgw1qjba0gia" class="text_flooter" style="grid-row: 4;">Instagram-works</a>
+        </div>
+      </div>
+      <p class="search_gen_text">Search</p>
+        <form action="" method="post" class="search">
+          <input type="search" name="" placeholder="Search" class="input">
+          <input type="submit" name="" value="" class="submit">
+        </form>
+        <p class="text_bottom">© Novam Vitam, 2021, Alesia Drakonova</p>
+    </flooter>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> 
+    <script type="text/javascript">
+      $(function(){
+        var transTime = 15000;
+        var numBgColors = $('.bg-grad').length;
+        var bgtrans = setInterval(function(){
+          if($('.bg-grad.active').index() == ($('.bg-grad').length-1)){
+            $('.bg-grad.active').removeClass('active');
+            $('.bg-grad').eq(0).addClass('active');
+          }else{
+            var curIndex = $('.bg-grad.active').index();
+            $('.bg-grad.active').removeClass('active');
+            $('.bg-grad').eq(curIndex+1).addClass('active');
+          }
+        },transTime);
+      });
+    </script>   
+  </body>
+</html>
