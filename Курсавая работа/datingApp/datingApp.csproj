@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5964353B-C686-4A1B-8F74-E30ABB68F874}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>datingApp</RootNamespace>
+    <AssemblyName>datingApp</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InvitationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InvitationForm.Designer.cs">
+      <DependentUpon>InvitationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="JoinIn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="JoinIn.Designer.cs">
+      <DependentUpon>JoinIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LikesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LikesForm.Designer.cs">
+      <DependentUpon>LikesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuForm.Designer.cs">
+      <DependentUpon>MenuForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Profile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Profile.Designer.cs">
+      <DependentUpon>Profile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SignInForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SignInForm.Designer.cs">
+      <DependentUpon>SignInForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs" />
+    <Compile Include="UserArray.cs" />
+    <Compile Include="UserInfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserInfoForm.Designer.cs">
+      <DependentUpon>UserInfoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserInfoForm2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserInfoForm2.Designer.cs">
+      <DependentUpon>UserInfoForm2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Wish.cs" />
+    <Compile Include="WishesUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WishesUser.Designer.cs">
+      <DependentUpon>WishesUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WishesUser2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WishesUser2.Designer.cs">
+      <DependentUpon>WishesUser2.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InvitationForm.resx">
+      <DependentUpon>InvitationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="JoinIn.resx">
+      <DependentUpon>JoinIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LikesForm.resx">
+      <DependentUpon>LikesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuForm.resx">
+      <DependentUpon>MenuForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Profile.resx">
+      <DependentUpon>Profile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SignInForm.resx">
+      <DependentUpon>SignInForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserInfoForm.resx">
+      <DependentUpon>UserInfoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserInfoForm2.resx">
+      <DependentUpon>UserInfoForm2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WishesUser.resx">
+      <DependentUpon>WishesUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WishesUser2.resx">
+      <DependentUpon>WishesUser2.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\imgonline-com-ua-Resize-s9Z90nrin9Xq3Teb.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\abstrakciya-geometriya-linii-2227-crop %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\texture-pink-cvet-tekstura1.png" />
+    <None Include="Resources\texture-pink-cvet-tekstura.jpg" />
+    <None Include="Resources\texture-pink-cvet-tekstura.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\background-with-purple-and-turquoise-squares_1023-155.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\background-with-purple-and-turquoise-squares_1023-156.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\8ad9d6dfde1a63ff3ae19065d3ee7c4d.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\purple-geometric-mosaic-background_1302-5845.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\фон.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\298_разное_sh_481400953.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\298_разное_sh_481400953.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2716421-256.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconfinder_7_2716417.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2703063-256.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\43185.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\depositphotos_18064507-stock-photo-love-notes-background-for-design.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\depositphotos_242588562-stock-photo-blank-greeting-card-and-white.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2931168-256.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\depositphotos_7733344-stock-photo-vintage-postcard-back.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blank-white-greeting-card-with-mum-flowers_39526-75.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\card-greeting-pink-hearts-gloss-empty_18591-11470.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cvety-gvozdiki-lenta-bantik.jpg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
